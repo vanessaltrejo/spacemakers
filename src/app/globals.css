@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens — single source of truth for the SpaceMakers palette.
+ * Tailwind v4 exposes every --color-* token as a utility (bg-gold, text-ember, ...).
+ */
+@theme {
+  /* Surfaces */
+  --color-void: #000000;
+  --color-panel: #1a1a1a;
+  --color-hull: #080b10;
+  --color-hull-soft: #10151d;
+
+  /* Text */
+  --color-gold: #f2dfb4;
+  --color-cream: #fbf3e6;
+  --color-starlight: #e8ebef;
+  --color-mist: #9aa1ab;
+
+  /* Brand accents */
+  --color-nebula: #c9356f;
+  --color-cobalt: #0b1aa0;
+  --color-ember: #ff8a3d;
+  --color-orbit: #23799a;
+  --color-orbit-bright: #4cc3e6;
+  --color-lime: #c4f25a;
+  --color-mars: #e2683a;
+
+  /* Typography (variables injected by next/font in layout.tsx) */
+  --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-space-mono), ui-monospace, monospace;
+
+  /* Animations */
+  --animate-marquee: marquee 32s linear infinite;
+  --animate-flare: flare 6s ease-in-out infinite;
+  --animate-float: float 9s ease-in-out infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes flare {
+    0%,
+    100% {
+      opacity: 0.75;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.08);
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-14px) rotate(2deg);
+    }
+  }
+}
+
+/* Shared page container: wide on desktop with slim side gutters. */
+@utility container-page {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1760px;
+  padding-inline: 1rem;
+
+  @media (width >= 40rem) {
+    padding-inline: 1.5rem;
+  }
+
+  @media (width >= 64rem) {
+    padding-inline: 2.5rem;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4rem;
+}
+
+body {
+  background: var(--color-void);
+  color: var(--color-starlight);
+}
+
+::selection {
+  background: var(--color-nebula);
+  color: var(--color-cream);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-orbit-bright);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
