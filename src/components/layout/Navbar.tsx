@@ -1,9 +1,10 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
-import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 import { Logo } from "@/components/ui/Logo";
-import { useActiveSection } from "@/hooks/useActiveSection";
 import type { NavItem } from "@/types/content";
 
 interface NavbarProps {
@@ -11,83 +12,56 @@ interface NavbarProps {
   joinCta: NavItem;
 }
 
-const toSectionId = (href: string): string => href.replace("#", "");
-
 export function Navbar({ navigation, joinCta }: NavbarProps) {
-  const activeSection = useActiveSection(navigation.map((item) => toSectionId(item.href)));
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 24);
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const closeMenu = () => setIsMenuOpen(false);
 
   return (
-    <motion.header
-      initial={{ y: -80 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
-        isScrolled || isMenuOpen ? "bg-panel/90 backdrop-blur-md" : "bg-panel"
-      }`}
-    >
-      <nav
-        aria-label="Principal"
-        className="container-page flex h-14 items-center justify-between gap-4"
-      >
-        <a href="#inicio" onClick={closeMenu} className="text-white" aria-label="SpaceMakers, ir al inicio">
-          <Logo className="h-8 w-auto sm:h-9" />
-        </a>
+    <header className="fixed inset-x-0 top-0 z-50 bg-void/70 backdrop-blur-xl">
+      <nav aria-label="Principal" className="container-page grid h-14 grid-cols-[1fr_auto_1fr] items-center gap-6">
+        <Link href="/" onClick={closeMenu} className="justify-self-start text-white" aria-label="SpaceMakers, ir al inicio">
+          <Logo className="h-7 w-auto sm:h-8" />
+        </Link>
 
-        <ul className="hidden h-full items-stretch md:flex">
+        <ul className="hidden items-center gap-1 md:flex">
           {navigation.map((item) => {
-            const isActive = activeSection === toSectionId(item.href);
+            const isActive = pathname === item.href;
             return (
-              <li key={item.href} className="relative flex">
-                {isActive && (
-                  <motion.span
-                    layoutId="nav-active"
-                    className="absolute inset-0 border-x border-b border-cobalt/80 bg-cobalt/25"
-                    transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                  />
-                )}
-                <a
+              <li key={item.href} className="relative">
+                <Link
                   href={item.href}
-                  aria-current={isActive ? "true" : undefined}
-                  className={`relative flex items-center px-6 font-display text-sm transition-colors lg:px-8 ${
-                    isActive ? "text-white" : "text-starlight/75 hover:text-white"
+                  aria-current={isActive ? "page" : undefined}
+                  className={`block px-4 py-2 text-sm transition-colors ${
+                    isActive ? "text-gold" : "text-starlight/70 hover:text-starlight"
                   }`}
                 >
                   {item.label}
-                </a>
+                </Link>
               </li>
             );
           })}
         </ul>
 
-        <div className="flex items-center gap-3">
-          <a
+        <div className="flex items-center justify-self-end gap-3">
+          <Link
             href={joinCta.href}
-            className="hidden rounded-sm bg-cobalt px-4 py-1.5 font-display text-sm text-white shadow-[0_0_0_rgba(11,26,160,0)] transition-all hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(60,80,255,0.45)] sm:inline-block"
+            className="hidden h-8 items-center rounded-full bg-cobalt px-3.5 text-xs font-medium tracking-tight text-white transition-colors hover:bg-[#1426c8] sm:inline-flex"
           >
             {joinCta.label}
-          </a>
-          <button
-            type="button"
-            disabled
-            title="Portal de miembros (próximamente)"
-            aria-label="Portal de miembros (próximamente)"
-            className="hidden size-8 items-center justify-center rounded-full bg-white text-panel sm:flex"
+          </Link>
+          {/* Account entry point: inert until the login / sign-up flow exists. */}
+          <span
+            role="img"
+            aria-label="Cuenta (próximamente)"
+            className="flex size-8 items-center justify-center rounded-full border border-line-strong text-starlight/70 select-none"
           >
-            <svg viewBox="0 0 24 24" className="size-5" fill="currentColor" aria-hidden="true">
-              <path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z" />
+            <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
+              <circle cx="12" cy="8" r="3.5" />
+              <path d="M4.5 20c.8-3.6 3.8-5.5 7.5-5.5s6.7 1.9 7.5 5.5" strokeLinecap="round" />
             </svg>
-          </button>
+          </span>
 
           <button
             type="button"
@@ -95,18 +69,19 @@ export function Navbar({ navigation, joinCta }: NavbarProps) {
             aria-expanded={isMenuOpen}
             aria-controls="mobile-menu"
             aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
-            className="flex size-10 flex-col items-center justify-center gap-1.5 md:hidden"
+            className="flex size-9 flex-col items-center justify-center gap-1.5 md:hidden"
           >
-            <span
-              className={`h-0.5 w-6 bg-white transition-transform ${isMenuOpen ? "translate-y-2 rotate-45" : ""}`}
-            />
-            <span className={`h-0.5 w-6 bg-white transition-opacity ${isMenuOpen ? "opacity-0" : ""}`} />
-            <span
-              className={`h-0.5 w-6 bg-white transition-transform ${isMenuOpen ? "-translate-y-2 -rotate-45" : ""}`}
-            />
+            <span className={`h-px w-5 bg-white transition-transform ${isMenuOpen ? "translate-y-[3.5px] rotate-45" : ""}`} />
+            <span className={`h-px w-5 bg-white transition-transform ${isMenuOpen ? "-translate-y-[3.5px] -rotate-45" : ""}`} />
           </button>
         </div>
       </nav>
+
+      {/* Nebula line under the navbar */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-0.5 bg-nebula shadow-[0_0_24px_rgba(201,53,111,0.9)]"
+      />
 
       <AnimatePresence>
         {isMenuOpen && (
@@ -115,32 +90,37 @@ export function Navbar({ navigation, joinCta }: NavbarProps) {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden border-t border-white/10 md:hidden"
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="overflow-hidden border-t border-line md:hidden"
           >
-            <ul className="flex flex-col gap-1 px-4 py-4">
-              {[...navigation, joinCta].map((item, index) => (
-                <motion.li
-                  key={item.href}
-                  initial={{ x: -16, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 0.05 * index }}
-                >
-                  <a
+            <ul className="container-page flex flex-col py-4">
+              {navigation.map((item) => (
+                <li key={item.href} className="border-b border-line">
+                  <Link
                     href={item.href}
                     onClick={closeMenu}
-                    className={`block rounded-sm px-3 py-3 font-display text-lg ${
-                      item.href === joinCta.href ? "mt-2 bg-cobalt text-white" : "text-starlight"
+                    aria-current={pathname === item.href ? "page" : undefined}
+                    className={`block py-4 text-2xl font-light tracking-tight ${
+                      pathname === item.href ? "text-gold" : "text-starlight"
                     }`}
                   >
                     {item.label}
-                  </a>
-                </motion.li>
+                  </Link>
+                </li>
               ))}
+              <li className="pt-6">
+                <Link
+                  href={joinCta.href}
+                  onClick={closeMenu}
+                  className="flex h-11 items-center justify-center rounded-full bg-cobalt text-sm font-medium text-white"
+                >
+                  {joinCta.label}
+                </Link>
+              </li>
             </ul>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </header>
   );
 }

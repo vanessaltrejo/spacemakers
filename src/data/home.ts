@@ -3,13 +3,23 @@ import type { HomeContent } from "@/types/content";
 // Dummy content. Stats are based on public notes about the ISSSP (Hong Kong) result;
 // everything else is placeholder copy taken from the Canva mockup.
 export const homeContent: HomeContent = {
+  hero: {
+    eyebrow: "Tecnológico de Monterrey",
+    title: "SpaceMakers is",
+    rotatingWords: ["community", "challenges", "innovation", "exploration"],
+    subtitle:
+      "Diseñamos rovers, nanosatélites y hardware validado para el espacio, desde México y con una tripulación de estudiantes.",
+    primaryCta: { label: "Únete a la tripulación", href: "#unete" },
+    secondaryCta: { label: "Explorar misiones", href: "#programas" },
+  },
   about: {
+    statement:
+      "Democratizamos la investigación espacial y la robótica de superficie marciana desde México.",
     image: {
       src: "/images/crew.webp",
       alt: "Dos astronautas sonriendo dentro de una cápsula espacial",
     },
     paragraphs: [
-      "Democratizamos la investigación espacial y la robótica de superficie marciana desde México. Diseñamos tecnología autónoma con validación orbital directa y ensayos análogos de alta resistencia.",
       "Trabajamos con estudiantes y mentores de distintas instituciones, creando así una comunidad integral con una misión en común.",
     ],
   },
@@ -24,7 +34,7 @@ export const homeContent: HomeContent = {
   pillars: [
     {
       id: "pillar-rover",
-      anchor: "rover",
+      slug: "rover",
       index: "01",
       category: "Robótica planetaria",
       title: "Rover Ares a Marte",
@@ -46,7 +56,7 @@ export const homeContent: HomeContent = {
     },
     {
       id: "pillar-satellite",
-      anchor: "satelites",
+      slug: "satelites",
       index: "02",
       category: "Órbita baja",
       title: "Nanosatélites Aurora",
@@ -68,7 +78,7 @@ export const homeContent: HomeContent = {
     },
     {
       id: "pillar-kyutech",
-      anchor: "kyutech",
+      slug: "kyutech",
       index: "03",
       category: "Validación espacial",
       title: "Alianza Kyutech Japón",
@@ -96,6 +106,7 @@ export const homeContent: HomeContent = {
       suffix: "er",
       label: "Lugar ISSSP",
       description: "International Space Science and Scientific Payload Competition, Hong Kong.",
+      tone: "ember",
     },
     {
       id: "isssp-teams",
@@ -103,18 +114,21 @@ export const homeContent: HomeContent = {
       prefix: "+",
       label: "Equipos superados",
       description: "Seleccionados entre los 30 finalistas a nivel mundial.",
+      tone: "orbit",
     },
     {
       id: "americas",
       value: 1,
       label: "Equipo de América",
       description: "Únicos representantes del continente en la gran final.",
+      tone: "lime",
     },
     {
       id: "pillars",
       value: 3,
       label: "Pilares de misión",
       description: "Robótica planetaria, órbita baja y validación espacial.",
+      tone: "nebula",
     },
   ],
   recruitment: {
@@ -123,9 +137,8 @@ export const homeContent: HomeContent = {
     titleEmphasis: "de exploradores aeroespaciales.",
     description:
       "Buscamos talento apasionado en aviónica, visión computacional, diseño mecánico y biotecnología espacial para impulsar las misiones del Tecnológico de Monterrey.",
-    ctaLabel: "Postular candidatura",
+    ctaLabel: "Únete a la tripulación",
     ctaHref: "mailto:spacemakers@tec.mx?subject=Postulaci%C3%B3n%20Tripulaci%C3%B3n%202026",
-    deadlineLabel: "Recepción hasta marzo 2026",
     image: { src: "/images/mars.webp", alt: "Planeta Marte" },
   },
   news: [
@@ -133,8 +146,9 @@ export const homeContent: HomeContent = {
       id: "spaceweek-fime-2026",
       title: "SpaceWeek at FIME with us",
       excerpt:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel orci consectetur, dapibus orci vel, semper mauris. Duis viverra pellentesque massa, quis egestas mi tincidunt vitae.",
+        "SpaceWeek Mx llega a la FIME: martes 6 de octubre, de 09:00 a 15:00 h, en el Auditorio Dr. Raúl G. Quintero Flores. Ven a conocer el mundo espacial con SpaceMakers.",
       publishedAt: "2026-10-06",
+      location: "FIME UANL, Nuevo León",
       image: {
         src: "/images/news-spaceweek.webp",
         alt: "Cartel de SpaceWeek Mx FIME 2026, martes 6 de octubre de 09:00 a 15:00",
@@ -144,11 +158,37 @@ export const homeContent: HomeContent = {
       id: "urc-new-season",
       title: "Nueva temporada de URC",
       excerpt:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel orci consectetur, dapibus orci vel, semper mauris. Duis viverra pellentesque massa, quis egestas mi tincidunt vitae.",
+        "Arranca una nueva temporada del University Rover Challenge, la competencia de rovers marcianos en el desierto de Utah. Ares ya se prepara para la edición 2027.",
       publishedAt: "2026-09-20",
+      location: "Utah, EE. UU.",
       image: {
         src: "/images/news-urc.webp",
         alt: "Rover naranja con brazo robótico en el desierto del University Rover Challenge",
+      },
+    },
+    // TODO: dummy entries below — replace with real announcements.
+    {
+      id: "kyutech-tvac-tests",
+      title: "Pruebas TVAC con Kyutech",
+      excerpt:
+        "Nuestro hardware viaja a Japón para someterse a ensayos de termo-vacío y vibración junto al Kyushu Institute of Technology, antes de su validación para vuelo.",
+      publishedAt: "2026-08-12",
+      location: "Kitakyushu, Japón",
+      image: {
+        src: "/images/kyutech-team.webp",
+        alt: "Equipo de estudiantes posando con robots frente a un edificio en Japón",
+      },
+    },
+    {
+      id: "aurora-design-review",
+      title: "Aurora avanza en su diseño",
+      excerpt:
+        "Aurora 3U completó su revisión de diseño: cámara multiespectral, computadora de vuelo y enlace de comunicaciones listos para pasar a la etapa de integración.",
+      publishedAt: "2026-07-03",
+      location: "Monterrey, Nuevo León",
+      image: {
+        src: "/images/satellite-aurora.webp",
+        alt: "Render de un nanosatélite orbitando sobre la Tierra",
       },
     },
   ],

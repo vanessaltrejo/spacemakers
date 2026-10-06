@@ -1,23 +1,16 @@
 import type { Metadata, Viewport } from "next";
-import { Outfit, Space_Grotesk, Space_Mono } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import { MotionProvider } from "@/components/providers/MotionProvider";
 import "./globals.css";
 
-const outfit = Outfit({
-  variable: "--font-outfit",
-  subsets: ["latin"],
-  weight: ["200", "300", "400"],
-});
-
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const geistSans = Geist({
+  variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
-const spaceMono = Space_Mono({
-  variable: "--font-space-mono",
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
   subsets: ["latin"],
-  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
@@ -34,7 +27,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="es"
-      className={`${outfit.variable} ${spaceGrotesk.variable} ${spaceMono.variable} antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
       <body className="min-h-svh bg-void font-sans">
         <MotionProvider>{children}</MotionProvider>

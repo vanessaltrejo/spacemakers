@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 /*
- * Design tokens — single source of truth for the SpaceMakers palette.
- * Tailwind v4 exposes every --color-* token as a utility (bg-gold, text-ember, ...).
+ * Design tokens — single source of truth for the SpaceMakers design system.
+ * Tailwind v4 exposes every token as a utility (bg-gold, text-ember, border-line, ...).
  */
 @theme {
   /* Surfaces */
@@ -11,11 +11,15 @@
   --color-hull: #080b10;
   --color-hull-soft: #10151d;
 
+  /* Hairlines */
+  --color-line: rgb(255 255 255 / 0.18);
+  --color-line-strong: rgb(255 255 255 / 0.32);
+
   /* Text */
-  --color-gold: #f2dfb4;
+  --color-gold: #edba3b;
   --color-cream: #fbf3e6;
   --color-starlight: #e8ebef;
-  --color-mist: #9aa1ab;
+  --color-mist: #8d949e;
 
   /* Brand accents */
   --color-nebula: #c9356f;
@@ -27,14 +31,14 @@
   --color-mars: #e2683a;
 
   /* Typography (variables injected by next/font in layout.tsx) */
-  --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-space-mono), ui-monospace, monospace;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
   /* Animations */
-  --animate-marquee: marquee 32s linear infinite;
+  --animate-marquee: marquee 40s linear infinite;
   --animate-flare: flare 6s ease-in-out infinite;
-  --animate-float: float 9s ease-in-out infinite;
+  --animate-orbit: orbit 40s linear infinite;
+  --animate-blink: blink 2s ease-in-out infinite;
 
   @keyframes marquee {
     from {
@@ -57,13 +61,19 @@
     }
   }
 
-  @keyframes float {
+  @keyframes orbit {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes blink {
     0%,
     100% {
-      transform: translateY(0) rotate(0deg);
+      opacity: 1;
     }
     50% {
-      transform: translateY(-14px) rotate(2deg);
+      opacity: 0.25;
     }
   }
 }
@@ -84,6 +94,23 @@
   }
 }
 
+/* Faint blueprint grid used behind hero / CTA panels. */
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, var(--color-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-line) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+/* Small uppercase monospace label — the "telemetry" voice of the UI. */
+@utility label-mono {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 4rem;
@@ -92,6 +119,7 @@ html {
 body {
   background: var(--color-void);
   color: var(--color-starlight);
+  font-feature-settings: "ss01", "cv11";
 }
 
 ::selection {

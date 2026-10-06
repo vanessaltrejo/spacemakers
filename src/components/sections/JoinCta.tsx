@@ -3,7 +3,9 @@
 import { motion, useScroll, useTransform } from "motion/react";
 import Image from "next/image";
 import { useRef } from "react";
+import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Reveal } from "@/components/ui/Reveal";
+import { StatusDot } from "@/components/ui/StatusDot";
 import type { Recruitment } from "@/types/content";
 
 interface JoinCtaProps {
@@ -21,15 +23,15 @@ export function JoinCta({ content }: JoinCtaProps) {
     <section
       id="unete"
       ref={sectionRef}
-      aria-labelledby="join-heading"
-      className="container-page scroll-mt-20 py-10"
+      aria-labelledby="join-title"
+      className="container-page scroll-mt-20 py-12"
     >
-      <div className="relative overflow-hidden border-l border-nebula/40 bg-gradient-to-r from-[#1a1012] via-[#120c0d] to-void">
+      <div className="relative overflow-hidden border border-line bg-gradient-to-br from-[#140b0c] via-void to-void">
         {/* Mars bleeds off the bottom-right corner; the mask trims the photo to the planet's disc. */}
         <motion.div
           aria-hidden="true"
           style={{ scale: marsScale, x: marsX }}
-          className="pointer-events-none absolute right-0 bottom-0 aspect-[710/545] h-[85%] origin-bottom-right opacity-35 md:h-[72%] md:opacity-100 xl:h-[88%]"
+          className="pointer-events-none absolute right-0 bottom-0 aspect-[710/545] h-[85%] origin-bottom-right opacity-35 md:h-[78%] md:opacity-100 xl:h-[92%]"
         >
           <Image
             src={content.image.src}
@@ -38,34 +40,42 @@ export function JoinCta({ content }: JoinCtaProps) {
             sizes="(min-width: 1024px) 45vw, 70vw"
             className="object-cover [mask-image:radial-gradient(ellipse_53.5%_69.7%_at_55%_69%,black_96%,transparent_100%)]"
           />
+          {/* Orbit rings centered on the planet's disc */}
+          <svg
+            viewBox="0 0 100 100"
+            className="absolute top-[69%] left-[55%] w-[132%] -translate-1/2 animate-orbit overflow-visible"
+          >
+            <circle cx="50" cy="50" r="49" fill="none" stroke="rgb(237 186 59 / 0.35)" strokeWidth="0.15" strokeDasharray="0.6 1.2" />
+            <circle cx="50" cy="1" r="0.9" fill="#edba3b" />
+          </svg>
+          <svg
+            viewBox="0 0 100 100"
+            className="absolute top-[69%] left-[55%] w-[114%] -translate-1/2 animate-orbit overflow-visible [animation-direction:reverse] [animation-duration:60s]"
+          >
+            <circle cx="50" cy="50" r="49" fill="none" stroke="rgb(255 255 255 / 0.08)" strokeWidth="0.15" />
+            <circle cx="99" cy="50" r="0.7" fill="#c9356f" />
+          </svg>
         </motion.div>
 
-        <div className="relative max-w-2xl space-y-6 px-6 py-14 sm:px-12 md:max-w-[58%] lg:py-20 xl:max-w-[54%]">
+        <div className="relative max-w-2xl space-y-6 px-6 py-16 sm:px-12 md:max-w-[58%] lg:py-24 xl:max-w-[50%]">
           <Reveal>
-            <p className="font-mono text-xs tracking-[0.3em] text-mars uppercase">{content.eyebrow}</p>
+            <p className="label-mono flex items-center gap-3 text-mars">
+              <StatusDot colorClassName="bg-mars" />
+              {content.eyebrow}
+            </p>
           </Reveal>
           <Reveal delay={0.1}>
-            <h2 id="join-heading" className="font-sans text-4xl leading-tight text-white xl:text-5xl">
-              {content.titleLead}
-              <br />
-              <span className="font-semibold text-gold">{content.titleEmphasis}</span>
+            <h2 id="join-title" className="text-4xl leading-[1.05] font-light tracking-[-0.035em] text-starlight xl:text-6xl">
+              {content.titleLead} <span className="text-gold">{content.titleEmphasis}</span>
             </h2>
           </Reveal>
           <Reveal delay={0.2}>
-            <p className="max-w-lg leading-relaxed text-starlight/70">{content.description}</p>
+            <p className="max-w-md leading-relaxed text-mist">{content.description}</p>
           </Reveal>
-          <Reveal delay={0.3} className="flex flex-wrap items-center gap-6 pt-4">
-            <a
-              href={content.ctaHref}
-              className="group relative overflow-hidden bg-cream px-7 py-4 font-mono text-sm font-bold tracking-[0.2em] text-void uppercase transition-transform hover:-translate-y-0.5"
-            >
-              <span
-                aria-hidden="true"
-                className="absolute inset-0 -translate-x-full bg-gold transition-transform duration-500 ease-out group-hover:translate-x-0"
-              />
-              <span className="relative">{content.ctaLabel}</span>
-            </a>
-            <p className="font-mono text-xs tracking-[0.2em] text-mist uppercase">{content.deadlineLabel}</p>
+          <Reveal delay={0.3} className="pt-4">
+            <ButtonLink href={content.ctaHref} variant="cobalt" withArrow>
+              {content.ctaLabel}
+            </ButtonLink>
           </Reveal>
         </div>
       </div>

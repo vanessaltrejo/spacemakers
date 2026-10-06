@@ -23,16 +23,30 @@ export interface SocialLink {
 
 export interface SiteInfo {
   name: string;
-  tagline: string;
+  description: string;
+  /** IANA time zone used by the live mission clock. */
+  timeZone: string;
   phone: string;
   email: string;
-  address: string;
+  /** Postal address, one entry per displayed line. */
+  addressLines: string[];
   navigation: NavItem[];
   socials: SocialLink[];
   joinCta: NavItem;
 }
 
+export interface HeroContent {
+  eyebrow: string;
+  /** Static lead of the headline, followed by the typewriter words. */
+  title: string;
+  rotatingWords: string[];
+  subtitle: string;
+  primaryCta: NavItem;
+  secondaryCta: NavItem;
+}
+
 export interface AboutContent {
+  statement: string;
   image: ImageAsset;
   paragraphs: string[];
 }
@@ -43,7 +57,7 @@ export interface Partner {
 }
 
 /** Visual accent applied to a pillar card. Mapped to design tokens in the UI layer. */
-export type AccentTone = "ember" | "orbit" | "lime";
+export type AccentTone = "ember" | "orbit" | "lime" | "nebula";
 
 export interface PillarSpec {
   label: string;
@@ -52,8 +66,8 @@ export interface PillarSpec {
 
 export interface Pillar {
   id: string;
-  /** Anchor id used by the navigation (e.g. "rover"). */
-  anchor: string;
+  /** URL segment of the pillar page (e.g. "rover" → /rover). */
+  slug: string;
   index: string;
   category: string;
   title: string;
@@ -72,6 +86,7 @@ export interface Stat {
   suffix?: string;
   label: string;
   description: string;
+  tone: AccentTone;
 }
 
 export interface Recruitment {
@@ -81,7 +96,6 @@ export interface Recruitment {
   description: string;
   ctaLabel: string;
   ctaHref: string;
-  deadlineLabel: string;
   image: ImageAsset;
 }
 
@@ -91,10 +105,13 @@ export interface NewsItem {
   excerpt: string;
   /** ISO 8601 date string. */
   publishedAt: string;
+  /** Where the news took place, shown next to the date. */
+  location: string;
   image: ImageAsset;
 }
 
 export interface HomeContent {
+  hero: HeroContent;
   about: AboutContent;
   partners: Partner[];
   pillars: Pillar[];

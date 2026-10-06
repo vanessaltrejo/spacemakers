@@ -1,6 +1,6 @@
 import { homeContent } from "@/data/home";
 import { siteInfo } from "@/data/site";
-import type { HomeContent, SiteInfo } from "@/types/content";
+import type { HomeContent, Pillar, SiteInfo } from "@/types/content";
 
 /**
  * Content service layer.
@@ -14,4 +14,12 @@ export async function getSiteInfo(): Promise<SiteInfo> {
 
 export async function getHomeContent(): Promise<HomeContent> {
   return homeContent;
+}
+
+export async function getPillars(): Promise<Pillar[]> {
+  return homeContent.pillars;
+}
+
+export async function getPillarBySlug(slug: string): Promise<Pillar | null> {
+  return homeContent.pillars.find((pillar) => pillar.slug === slug) ?? null;
 }
