@@ -40,7 +40,6 @@ export interface HeroContent {
   /** Static lead of the headline, followed by the typewriter words. */
   title: string;
   rotatingWords: string[];
-  subtitle: string;
   primaryCta: NavItem;
   secondaryCta: NavItem;
 }

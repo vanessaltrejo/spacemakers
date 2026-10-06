@@ -23,8 +23,8 @@ const createStars = (width: number, height: number, density: number): Star[] => 
   return Array.from({ length: count }, () => ({
     x: Math.random() * width,
     y: Math.random() * height,
-    radius: Math.random() * 1.2 + 0.2,
-    baseAlpha: Math.random() * 0.6 + 0.2,
+    radius: Math.random() * 1.2 + 0.4,
+    baseAlpha: Math.random() * 0.55 + 0.35,
     twinkleSpeed: Math.random() * 0.002 + 0.0005,
     phase: Math.random() * Math.PI * 2,
     drift: Math.random() * 0.04 + 0.01,
@@ -32,7 +32,7 @@ const createStars = (width: number, height: number, density: number): Star[] => 
 };
 
 /** Lightweight twinkling star background drawn on a canvas. Pauses when off-screen. */
-export function Starfield({ className, density = 1.6 }: StarfieldProps) {
+export function Starfield({ className, density = 2 }: StarfieldProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {

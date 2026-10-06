@@ -19,7 +19,7 @@ export function Navbar({ navigation, joinCta }: NavbarProps) {
   const closeMenu = () => setIsMenuOpen(false);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 bg-void/70 backdrop-blur-xl">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-void/70 backdrop-blur-xl">
       <nav aria-label="Principal" className="container-page grid h-14 grid-cols-[1fr_auto_1fr] items-center gap-6">
         <Link href="/" onClick={closeMenu} className="justify-self-start text-white" aria-label="SpaceMakers, ir al inicio">
           <Logo className="h-7 w-auto sm:h-8" />
@@ -77,11 +77,6 @@ export function Navbar({ navigation, joinCta }: NavbarProps) {
         </div>
       </nav>
 
-      {/* Nebula line under the navbar */}
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-0.5 bg-nebula shadow-[0_0_24px_rgba(201,53,111,0.9)]"
-      />
 
       <AnimatePresence>
         {isMenuOpen && (

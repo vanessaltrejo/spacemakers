@@ -4,11 +4,9 @@ import type { HomeContent } from "@/types/content";
 // everything else is placeholder copy taken from the Canva mockup.
 export const homeContent: HomeContent = {
   hero: {
-    eyebrow: "Tecnológico de Monterrey",
+    eyebrow: "Del taller a la órbita",
     title: "SpaceMakers is",
     rotatingWords: ["community", "challenges", "innovation", "exploration"],
-    subtitle:
-      "Diseñamos rovers, nanosatélites y hardware validado para el espacio, desde México y con una tripulación de estudiantes.",
     primaryCta: { label: "Únete a la tripulación", href: "#unete" },
     secondaryCta: { label: "Explorar misiones", href: "#programas" },
   },

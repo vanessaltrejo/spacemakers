@@ -40,28 +40,25 @@ export function Hero({ content }: HeroProps) {
     >
       <Starfield className="absolute inset-0 size-full" />
 
-      {/* Planet */}
+      {/* Planet: static photo; it only fades up from the dark on load */}
       <motion.div
         style={{ y: planetY, scale: planetScale }}
-        className="absolute inset-x-0 bottom-0 h-[30%] origin-bottom sm:h-auto sm:aspect-[2000/525]"
+        className="absolute bottom-0 left-[-107%] aspect-[3.8/1] w-[220%] origin-bottom sm:left-0 sm:w-full"
       >
+        {/* The planet photo (no movement) */}
         <motion.div
-          initial={{ y: 120, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1.8, ease: easeOutExpo }}
-          className="relative size-full"
+          initial={{ filter: "brightness(0.22)" }}
+          animate={{ filter: "brightness(1)" }}
+          transition={{ duration: 3.4, delay: 0.6, ease: "easeOut" }}
+          className="absolute inset-0"
         >
           <Image
-            src="/images/hero-planet.webp"
+            src="/images/hero-earth.webp"
             alt=""
             fill
             priority
-            sizes="100vw"
-            className="object-cover object-bottom mix-blend-screen [mask-image:linear-gradient(to_bottom,transparent,black_30%)]"
-          />
-          <span
-            aria-hidden="true"
-            className="absolute top-[38%] left-[73.5%] size-28 -translate-1/2 animate-flare rounded-full bg-[radial-gradient(circle,rgba(255,240,200,0.85)_0%,rgba(255,170,90,0.3)_35%,transparent_70%)] mix-blend-screen sm:size-48"
+            sizes="(max-width: 639px) 220vw, 100vw"
+            className="object-cover object-top"
           />
         </motion.div>
       </motion.div>
@@ -69,7 +66,7 @@ export function Hero({ content }: HeroProps) {
       {/* Copy */}
       <motion.div
         style={{ y: copyY, opacity: copyOpacity }}
-        className="container-page relative z-10 flex flex-1 flex-col items-center pt-[9vh] text-center sm:pt-[10vh]"
+        className="container-page relative z-10 flex flex-1 flex-col items-center pt-[13vh] text-center sm:pt-[16vh]"
       >
         <motion.p {...fadeUp(0.2)} className="label-mono max-w-xs text-mist sm:max-w-none">
           <span className="mr-3 inline-flex align-middle">
@@ -92,10 +89,6 @@ export function Hero({ content }: HeroProps) {
           </motion.span>
         </h1>
 
-        <motion.p {...fadeUp(0.9)} className="mt-6 max-w-lg text-base leading-relaxed text-starlight/70 sm:text-lg">
-          {content.subtitle}
-        </motion.p>
-
         <motion.div {...fadeUp(1.05)} className="mt-8 flex flex-wrap justify-center gap-3">
           <ButtonLink href={content.primaryCta.href} variant="cobalt" withArrow>
             {content.primaryCta.label}
@@ -104,22 +97,6 @@ export function Hero({ content }: HeroProps) {
             {content.secondaryCta.label}
           </ButtonLink>
         </motion.div>
-      </motion.div>
-
-      {/* HUD readouts */}
-      <motion.div
-        {...fadeUp(1.4)}
-        className="container-page relative z-10 hidden items-end justify-center pb-8 md:flex"
-      >
-        <a href="#nosotros" className="label-mono flex flex-col items-center gap-3 text-mist hover:text-starlight">
-          Scroll
-          <motion.span
-            aria-hidden="true"
-            animate={{ scaleY: [0.3, 1, 0.3], originY: 0 }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="block h-10 w-px bg-starlight/60"
-          />
-        </a>
       </motion.div>
     </section>
   );
