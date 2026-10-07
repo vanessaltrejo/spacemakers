@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Temporary clone of the original rover dashboard repo.
+    "_reference/**",
   ]),
 ]);
 

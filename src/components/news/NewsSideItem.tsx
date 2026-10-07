@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "motion/react";
-import { NewsCategoryTag } from "@/components/news/NewsCategoryTag";
 import { NewsStageCover } from "@/components/news/NewsStageCover";
 import { toneStyles } from "@/components/pillars/toneStyles";
 import { formatShortDate } from "@/lib/formatDate";
@@ -39,12 +38,9 @@ export function NewsSideItem({ item, flushTop = false, onSelect }: NewsSideItemP
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-          <NewsCategoryTag category={item.category} />
-          <time dateTime={item.publishedAt} className={`label-mono ${toneStyle.text}`}>
-            {formatShortDate(item.publishedAt)}
-          </time>
-        </div>
+        <time dateTime={item.publishedAt} className={`label-mono block ${toneStyle.text}`}>
+          {formatShortDate(item.publishedAt)}
+        </time>
         <span className="mt-2 block text-xl leading-snug font-normal tracking-tight text-starlight transition-colors group-hover:text-gold sm:text-2xl">
           {item.title}
         </span>

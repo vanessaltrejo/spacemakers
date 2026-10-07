@@ -1,36 +1,36 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type { ReactNode } from "react";
 import { MotionProvider } from "@/components/providers/MotionProvider";
-import "./globals.css";
+import { fontVariables } from "@/lib/fonts";
+import "@/app/globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+/**
+ * <html>/<body> shell shared by the public root layouts, (site) and (auth).
+ * The dashboard has its own root layout so its global CSS stays isolated from the site.
+ */
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export const metadata: Metadata = {
+export const siteMetadata: Metadata = {
   title: "SpaceMakers | Innovación espacial estudiantil",
   description:
     "Grupo estudiantil del Tecnológico de Monterrey que democratiza la investigación espacial: rovers marcianos, nanosatélites y validación espacial con Kyutech.",
 };
 
-export const viewport: Viewport = {
+export const siteViewport: Viewport = {
   themeColor: "#000000",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+interface SiteDocumentProps {
+  children: ReactNode;
+}
+
+export function SiteDocument({ children }: SiteDocumentProps) {
   return (
     <html
       lang="es"
       // Next 16 no longer disables CSS smooth scrolling on route changes unless this is set,
       // which left pages stranded mid-scroll after navigating. Anchors still scroll smoothly.
       data-scroll-behavior="smooth"
-      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      className={`${fontVariables} antialiased`}
     >
       {/* Browser extensions (e.g. ColorZilla's cz-shortcut-listen) add attributes to <body> before
           React hydrates; suppressHydrationWarning only silences attribute mismatches on this element. */}

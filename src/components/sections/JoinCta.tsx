@@ -68,7 +68,7 @@ export function JoinCta({ content }: JoinCtaProps) {
             </p>
           </Reveal>
           <Reveal delay={0.1}>
-            <h2 id="join-title" className="text-4xl leading-[1.05] font-light tracking-[-0.035em] text-starlight xl:text-6xl">
+            <h2 id="join-title" className="text-4xl leading-[1.05] font-[350] tracking-[-0.035em] text-starlight xl:text-6xl">
               {content.titleLead} <span className="text-gold">{content.titleEmphasis}</span>
             </h2>
           </Reveal>

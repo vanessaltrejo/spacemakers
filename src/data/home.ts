@@ -144,7 +144,7 @@ export const homeContent: HomeContent = {
     },
   ],
   recruitment: {
-    eyebrow: "Tripulación 2026 // Convocatoria abierta",
+    eyebrow: "Tripulación 2026 - Convocatoria abierta",
     titleLead: "Únete a la próxima generación",
     titleEmphasis: "de exploradores aeroespaciales.",
     description:

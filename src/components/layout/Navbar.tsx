@@ -51,17 +51,19 @@ export function Navbar({ navigation, joinCta }: NavbarProps) {
           >
             {joinCta.label}
           </Link>
-          {/* Account entry point: inert until the login / sign-up flow exists. */}
-          <span
-            role="img"
-            aria-label="Cuenta (próximamente)"
-            className="flex size-8 items-center justify-center rounded-full border border-line-strong text-starlight/70 select-none"
+          <Link
+            href="/login"
+            aria-label="Iniciar sesión"
+            aria-current={pathname === "/login" ? "page" : undefined}
+            className={`flex size-8 items-center justify-center rounded-full border transition-colors hover:border-gold hover:text-gold ${
+              pathname === "/login" ? "border-gold text-gold" : "border-line-strong text-starlight/70"
+            }`}
           >
             <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
               <circle cx="12" cy="8" r="3.5" />
               <path d="M4.5 20c.8-3.6 3.8-5.5 7.5-5.5s6.7 1.9 7.5 5.5" strokeLinecap="round" />
             </svg>
-          </span>
+          </Link>
 
           <button
             type="button"

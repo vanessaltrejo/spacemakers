@@ -1,39 +1,11 @@
 @import "tailwindcss";
+@import "../styles/tokens.css";
 
-/*
- * Design tokens — single source of truth for the SpaceMakers design system.
- * Tailwind v4 exposes every token as a utility (bg-gold, text-ember, border-line, ...).
- */
+/* The rover dashboard ships its own Tailwind build (features/rover-dashboard/styles). */
+@source not "../features/rover-dashboard";
+
+/* Tailwind exposes every token as a utility (bg-gold, text-ember, border-line, ...). */
 @theme {
-  /* Surfaces */
-  --color-void: #000000;
-  --color-panel: #1a1a1a;
-  --color-hull: #080b10;
-  --color-hull-soft: #10151d;
-
-  /* Hairlines */
-  --color-line: rgb(255 255 255 / 0.18);
-  --color-line-strong: rgb(255 255 255 / 0.32);
-
-  /* Text */
-  --color-gold: #edba3b;
-  --color-cream: #fbf3e6;
-  --color-starlight: #e8ebef;
-  --color-mist: #8d949e;
-
-  /* Brand accents */
-  --color-nebula: #c9356f;
-  --color-cobalt: #0b1aa0;
-  --color-ember: #ff8a3d;
-  --color-orbit: #23799a;
-  --color-orbit-bright: #4cc3e6;
-  --color-lime: #c4f25a;
-  --color-mars: #e2683a;
-
-  /* Typography (variables injected by next/font in layout.tsx) */
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
-
   /* Animations */
   --animate-marquee: marquee 40s linear infinite;
   --animate-flare: flare 6s ease-in-out infinite;
@@ -102,13 +74,12 @@
   background-size: 72px 72px;
 }
 
-/* Small uppercase monospace label — the "telemetry" voice of the UI. */
+/* Small monospace label — the "telemetry" voice of the UI. */
 @utility label-mono {
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   line-height: 1rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 html {

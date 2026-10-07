@@ -38,7 +38,7 @@ export function PillarHero({ pillar, tagline, facts }: PillarHeroProps) {
             </p>
           </Reveal>
           <Reveal delay={0.1}>
-            <h1 className="mt-6 text-5xl font-light tracking-[-0.045em] text-gold sm:text-6xl lg:text-7xl">
+            <h1 className="mt-6 text-5xl font-[350] tracking-[-0.045em] text-gold sm:text-6xl lg:text-7xl">
               {pillar.title}
             </h1>
           </Reveal>

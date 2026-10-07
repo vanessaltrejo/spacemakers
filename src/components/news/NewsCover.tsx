@@ -50,8 +50,8 @@ export function NewsCover({ item, sizes, priority = false, compact = false }: Ne
 
       <span className={`absolute top-0 left-0 h-0.5 w-16 ${toneStyle.background}`} />
       <span
-        className={`absolute bottom-0 left-0 font-extralight tracking-[-0.04em] text-white/25 uppercase ${
-          compact ? "p-2 text-[10px] tracking-widest" : "p-5 text-3xl sm:text-5xl"
+        className={`absolute bottom-0 left-0 font-extralight tracking-[-0.04em] text-white/25 ${
+          compact ? "p-2 text-[10px]" : "p-5 text-3xl sm:text-5xl"
         }`}
       >
         {label}

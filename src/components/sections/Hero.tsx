@@ -73,7 +73,7 @@ export function Hero({ content }: HeroProps) {
 
         <h1
           id="hero-title"
-          className="mt-6 text-5xl font-light tracking-[-0.045em] text-gold sm:text-6xl lg:text-[5vw] lg:whitespace-nowrap"
+          className="mt-6 text-5xl font-[350] tracking-[-0.045em] text-gold sm:text-6xl lg:text-[5vw] lg:whitespace-nowrap"
         >
           <motion.span
             className="block"

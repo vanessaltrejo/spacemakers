@@ -1,0 +1,35 @@
+/*
+ * SpaceMakers design tokens — single source of truth, shared by the public site
+ * (app/globals.css) and the rover dashboard (features/rover-dashboard/styles).
+ * `static` always emits the variables, so plain CSS can use var(--color-gold) too.
+ */
+@theme static {
+  /* Surfaces */
+  --color-void: #000000;
+  --color-panel: #1a1a1a;
+  --color-hull: #080b10;
+  --color-hull-soft: #10151d;
+
+  /* Hairlines */
+  --color-line: rgb(255 255 255 / 0.18);
+  --color-line-strong: rgb(255 255 255 / 0.32);
+
+  /* Text */
+  --color-gold: #edba3b;
+  --color-cream: #fbf3e6;
+  --color-starlight: #e8ebef;
+  --color-mist: #8d949e;
+
+  /* Brand accents */
+  --color-nebula: #c9356f;
+  --color-cobalt: #0b1aa0;
+  --color-ember: #ff8a3d;
+  --color-orbit: #23799a;
+  --color-orbit-bright: #4cc3e6;
+  --color-lime: #c4f25a;
+  --color-mars: #e2683a;
+
+  /* Typography (variables injected by next/font, see lib/fonts.ts) */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}

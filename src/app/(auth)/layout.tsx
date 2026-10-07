@@ -1,4 +1,3 @@
-import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { SiteDocument, siteMetadata, siteViewport } from "@/components/layout/SiteDocument";
 import { getSiteInfo } from "@/services/contentService";
@@ -6,8 +5,8 @@ import { getSiteInfo } from "@/services/contentService";
 export const metadata = siteMetadata;
 export const viewport = siteViewport;
 
-/** Root layout for every public page: navbar + footer. */
-export default async function SiteLayout({ children }: LayoutProps<"/">) {
+/** Root layout for auth pages: the navbar only, no footer. */
+export default async function AuthLayout({ children }: LayoutProps<"/">) {
   const site = await getSiteInfo();
 
   return (
@@ -20,7 +19,6 @@ export default async function SiteLayout({ children }: LayoutProps<"/">) {
       </a>
       <Navbar navigation={site.navigation} joinCta={site.joinCta} />
       <main id="contenido">{children}</main>
-      <Footer site={site} />
     </SiteDocument>
   );
 }
