@@ -50,9 +50,19 @@ export interface AboutContent {
   paragraphs: string[];
 }
 
+/** Raster or vector logo with its intrinsic size (needed by next/image). */
+export interface LogoAsset extends ImageAsset {
+  width: number;
+  height: number;
+}
+
 export interface Partner {
   id: string;
   name: string;
+  /** Official logo, shown in its original colors. Falls back to the name when missing. */
+  logo?: LogoAsset;
+  /** Marks entries that look small at the default size (compact crests, short names). */
+  size?: "default" | "large";
 }
 
 /** Visual accent applied to a pillar card. Mapped to design tokens in the UI layer. */
@@ -71,11 +81,68 @@ export interface Pillar {
   category: string;
   title: string;
   summary: string;
-  description: string;
   image: ImageAsset;
   meta: PillarSpec;
+  /** Extra readouts shown on the home card (only the first one is used there). */
   specs: PillarSpec[];
   tone: AccentTone;
+}
+
+/** One titled entry inside an info grid (a mission, a subsystem, a person...). */
+export interface InfoItem {
+  title: string;
+  body: string;
+}
+
+export interface InfoSectionContent {
+  kind: "info";
+  heading: string;
+  intro?: string;
+  items: InfoItem[];
+  /** Prefix each item with a 01, 02... counter. */
+  showIndex: boolean;
+}
+
+export interface StoryFigure {
+  value: string;
+  label: string;
+}
+
+/** Narrative block with a few headline numbers (e.g. a competition result). */
+export interface StorySectionContent {
+  kind: "story";
+  heading: string;
+  paragraphs: string[];
+  figures: StoryFigure[];
+}
+
+export type PageBlock = InfoSectionContent | StorySectionContent;
+
+export type RoadmapStatus = "done" | "active" | "upcoming" | "tbc";
+
+export interface RoadmapStep {
+  when: string;
+  title: string;
+  description: string;
+  status: RoadmapStatus;
+}
+
+export interface SourceLink {
+  label: string;
+  href: string;
+}
+
+/** Everything the /rover, /satelites and /kyutech pages render, keyed by pillar slug. */
+export interface PillarPageContent {
+  slug: string;
+  tagline: string;
+  overview: string[];
+  /** Four key readouts shown under the page hero. */
+  facts: PillarSpec[];
+  blocks: PageBlock[];
+  roadmapHeading: string;
+  roadmap: RoadmapStep[];
+  sources: SourceLink[];
 }
 
 export interface Stat {
@@ -98,15 +165,35 @@ export interface Recruitment {
   image: ImageAsset;
 }
 
+export type NewsCategory = "competencias" | "eventos" | "comunidad" | "alianzas";
+
+/** Quick facts shown next to a lead story; each kind gets its own icon. */
+export interface NewsDetail {
+  kind: "location" | "link" | "schedule";
+  label: string;
+  /** Destination. For "location" it defaults to a map search of the label. */
+  href?: string;
+}
+
 export interface NewsItem {
+  /** Unique id of the story. */
   id: string;
   title: string;
   excerpt: string;
+  category: NewsCategory;
   /** ISO 8601 date string. */
   publishedAt: string;
   /** Where the news took place, shown next to the date. */
   location: string;
-  image: ImageAsset;
+  /** Cover photo. When missing, a generated cover in the category color is shown. */
+  image?: ImageAsset;
+  /** CSS object-position used to crop the cover (e.g. "50% 30%"). */
+  imagePosition?: string;
+  /** Optional quick facts (place, registration link, schedule). */
+  details?: NewsDetail[];
+  /** Full story, one entry per paragraph. */
+  body: string[];
+  sources: SourceLink[];
 }
 
 export interface HomeContent {

@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { ButtonLink } from "@/components/ui/ButtonLink";
-import { getPillarBySlug, getPillars } from "@/services/contentService";
+import { InfoGrid } from "@/components/pillar-page/InfoGrid";
+import { OtherPillars } from "@/components/pillar-page/OtherPillars";
+import { Overview } from "@/components/pillar-page/Overview";
+import { PillarHero } from "@/components/pillar-page/PillarHero";
+import { Roadmap } from "@/components/pillar-page/Roadmap";
+import { SourcesList } from "@/components/pillar-page/SourcesList";
+import { StoryBlock } from "@/components/pillar-page/StoryBlock";
+import { getPillarBySlug, getPillarPage, getPillars } from "@/services/contentService";
 
 export async function generateStaticParams() {
   const pillars = await getPillars();
@@ -10,29 +16,36 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps<"/[slug]">): Promise<Metadata> {
   const { slug } = await params;
-  const pillar = await getPillarBySlug(slug);
-  return pillar ? { title: `${pillar.title} | SpaceMakers` } : {};
+  const [pillar, page] = await Promise.all([getPillarBySlug(slug), getPillarPage(slug)]);
+  return pillar && page ? { title: `${pillar.title} | SpaceMakers`, description: page.tagline } : {};
 }
 
 /**
- * Placeholder for /rover, /satelites and /kyutech. These are the same pages the
- * navbar and the home cards point to; each one will get its own dedicated route
- * (e.g. app/(site)/rover/page.tsx), which takes precedence over this template.
+ * Shared template for /rover, /satelites and /kyutech. Content comes from the content service;
+ * a dedicated route (e.g. app/(site)/rover/page.tsx) would take precedence over this one.
  */
 export default async function PillarPage({ params }: PageProps<"/[slug]">) {
   const { slug } = await params;
-  const pillar = await getPillarBySlug(slug);
-  if (!pillar) notFound();
+  const [pillar, page, pillars] = await Promise.all([getPillarBySlug(slug), getPillarPage(slug), getPillars()]);
+  if (!pillar || !page) notFound();
 
   return (
-    <section className="container-page flex min-h-[70svh] flex-col justify-center pt-32 pb-24">
-      <h1 className="text-5xl font-light tracking-[-0.04em] text-gold sm:text-6xl lg:text-7xl">{pillar.title}</h1>
-      <p className="label-mono mt-6 text-mist">Página en construcción</p>
-      <div className="mt-8">
-        <ButtonLink href="/" variant="ghost">
-          ← Volver al inicio
-        </ButtonLink>
-      </div>
-    </section>
+    <>
+      <PillarHero pillar={pillar} tagline={page.tagline} facts={page.facts} />
+      <Overview paragraphs={page.overview} />
+
+      {page.blocks.map((block, index) => {
+        const id = `block-${index}`;
+        return block.kind === "story" ? (
+          <StoryBlock key={id} id={id} content={block} tone={pillar.tone} />
+        ) : (
+          <InfoGrid key={id} id={id} content={block} tone={pillar.tone} />
+        );
+      })}
+
+      <Roadmap heading={page.roadmapHeading} steps={page.roadmap} tone={pillar.tone} />
+      <SourcesList sources={page.sources} />
+      <OtherPillars pillars={pillars.filter((other) => other.slug !== pillar.slug)} />
+    </>
   );
 }

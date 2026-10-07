@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useRef } from "react";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Reveal } from "@/components/ui/Reveal";
+import { Starfield } from "@/components/ui/Starfield";
 import { StatusDot } from "@/components/ui/StatusDot";
 import type { Recruitment } from "@/types/content";
 
@@ -24,9 +25,11 @@ export function JoinCta({ content }: JoinCtaProps) {
       id="unete"
       ref={sectionRef}
       aria-labelledby="join-title"
-      className="container-page scroll-mt-20 py-12"
+      className="container-page scroll-mt-20 pt-12 pb-16 lg:pb-22"
     >
-      <div className="relative overflow-hidden border border-line bg-gradient-to-br from-[#140b0c] via-void to-void">
+      <div className="relative overflow-hidden border border-line bg-void">
+        <Starfield className="absolute inset-0 size-full" />
+
         {/* Mars bleeds off the bottom-right corner; the mask trims the photo to the planet's disc. */}
         <motion.div
           aria-hidden="true"
@@ -52,12 +55,12 @@ export function JoinCta({ content }: JoinCtaProps) {
             viewBox="0 0 100 100"
             className="absolute top-[69%] left-[55%] w-[114%] -translate-1/2 animate-orbit overflow-visible [animation-direction:reverse] [animation-duration:60s]"
           >
-            <circle cx="50" cy="50" r="49" fill="none" stroke="rgb(255 255 255 / 0.08)" strokeWidth="0.15" />
-            <circle cx="99" cy="50" r="0.7" fill="#c9356f" />
+            <circle cx="50" cy="50" r="49" fill="none" stroke="rgb(255 255 255 / 0.32)" strokeWidth="0.22" />
+            <circle cx="99" cy="50" r="0.9" fill="#c9356f" />
           </svg>
         </motion.div>
 
-        <div className="relative max-w-2xl space-y-6 px-6 py-16 sm:px-12 md:max-w-[58%] lg:py-24 xl:max-w-[50%]">
+        <div className="relative max-w-2xl space-y-6 px-6 py-12 sm:px-12 md:max-w-[58%] lg:py-16 xl:max-w-[50%]">
           <Reveal>
             <p className="label-mono flex items-center gap-3 text-mars">
               <StatusDot colorClassName="bg-mars" />

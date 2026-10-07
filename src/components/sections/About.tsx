@@ -41,7 +41,7 @@ export function About({ content }: AboutProps) {
                 alt={content.image.alt}
                 fill
                 sizes="(min-width: 1024px) 40vw, 100vw"
-                className="object-cover grayscale-[40%] transition-[filter,transform] duration-[1.2s] ease-out group-hover:scale-105 group-hover:grayscale-0"
+                className="object-cover"
               />
               {/* Faint brand-color wash over the photo */}
               <span

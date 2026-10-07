@@ -5,10 +5,10 @@ import { NewsSection } from "@/components/sections/NewsSection";
 import { PartnersMarquee } from "@/components/sections/PartnersMarquee";
 import { PillarsSection } from "@/components/sections/PillarsSection";
 import { StatsSection } from "@/components/sections/StatsSection";
-import { getHomeContent } from "@/services/contentService";
+import { getHomeContent, getNews } from "@/services/contentService";
 
 export default async function HomePage() {
-  const content = await getHomeContent();
+  const [content, news] = await Promise.all([getHomeContent(), getNews()]);
 
   return (
     <>
@@ -17,8 +17,8 @@ export default async function HomePage() {
       <StatsSection stats={content.stats} />
       <PartnersMarquee partners={content.partners} />
       <PillarsSection pillars={content.pillars} />
+      <NewsSection news={news} />
       <JoinCta content={content.recruitment} />
-      <NewsSection news={content.news} />
     </>
   );
 }

@@ -22,7 +22,7 @@ export function Navbar({ navigation, joinCta }: NavbarProps) {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-void/70 backdrop-blur-xl">
       <nav aria-label="Principal" className="container-page grid h-14 grid-cols-[1fr_auto_1fr] items-center gap-6">
         <Link href="/" onClick={closeMenu} className="justify-self-start text-white" aria-label="SpaceMakers, ir al inicio">
-          <Logo className="h-7 w-auto sm:h-8" />
+          <Logo className="h-5 w-auto sm:h-6" />
         </Link>
 
         <ul className="hidden items-center gap-1 md:flex">

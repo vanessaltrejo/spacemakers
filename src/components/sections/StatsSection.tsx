@@ -10,11 +10,11 @@ interface StatsSectionProps {
 export function StatsSection({ stats }: StatsSectionProps) {
   return (
     <section aria-label="Misión en números" className="container-page pt-8 pb-16 lg:pt-10 lg:pb-20">
-      <dl className="grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+      <dl className="grid border-t border-l border-line sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat, index) => {
           const tone = toneStyles[stat.tone];
           return (
-            <Reveal key={stat.id} delay={index * 0.1} className="relative flex flex-col overflow-hidden bg-void p-5 lg:p-6">
+            <Reveal key={stat.id} delay={index * 0.1} className="relative flex flex-col overflow-hidden border-r border-b border-line bg-void p-5 lg:p-6">
               {/* Soft colored wash and short accent bar: color without noise */}
               <span
                 aria-hidden="true"

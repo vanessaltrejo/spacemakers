@@ -22,26 +22,15 @@ export function PillarCard({ pillar, order }: PillarCardProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.8, delay: order * 0.12, ease: [0.22, 1, 0.36, 1] }}
-      className="group relative flex flex-col bg-void"
+      className="group relative flex flex-col"
     >
-      {/* Accent bar that draws in on hover */}
-      <span
-        aria-hidden="true"
-        className={`absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 transition-transform duration-700 ease-out group-hover:scale-x-100 ${tone.background}`}
-      />
-
       <div className="relative mx-6 mt-6 aspect-[4/3] overflow-hidden lg:mx-8 lg:mt-8">
         <Image
           src={pillar.image.src}
           alt={pillar.image.alt}
           fill
           sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 100vw"
-          className="object-cover grayscale-[60%] transition-[filter,transform] duration-700 ease-out group-hover:scale-105 group-hover:grayscale-0"
-        />
-        {/* Scan line sweeping across the image on hover */}
-        <span
-          aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-1/3 -translate-y-full bg-gradient-to-b from-transparent via-white/10 to-transparent transition-transform duration-[1.2s] ease-out group-hover:translate-y-[300%]"
+          className="object-cover"
         />
       </div>
 
@@ -74,6 +63,20 @@ export function PillarCard({ pillar, order }: PillarCardProps) {
           </span>
         </Link>
       </div>
+
+      {/*
+        Grid lines are drawn on top of the card so a neighbor's background can never cover them:
+        right/bottom on every card, plus the outer left/top edges of the grid. On hover, the accent
+        bar draws over the top line instead of replacing it.
+      */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-20 border border-transparent border-r-line border-b-line max-md:border-l-line max-md:group-first:border-t-line md:max-lg:group-nth-[2n+1]:border-l-line md:max-lg:group-nth-[-n+2]:border-t-line lg:group-nth-[3n+1]:border-l-line lg:group-nth-[-n+3]:border-t-line"
+      >
+        <span
+          className={`absolute inset-x-0 -top-px h-0.5 origin-left scale-x-0 transition-transform duration-700 ease-out group-hover:scale-x-100 ${tone.background}`}
+        />
+      </span>
     </motion.article>
   );
 }

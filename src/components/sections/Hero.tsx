@@ -5,7 +5,6 @@ import Image from "next/image";
 import { useRef } from "react";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Starfield } from "@/components/ui/Starfield";
-import { StatusDot } from "@/components/ui/StatusDot";
 import { Typewriter } from "@/components/ui/Typewriter";
 import type { HeroContent } from "@/types/content";
 
@@ -69,9 +68,6 @@ export function Hero({ content }: HeroProps) {
         className="container-page relative z-10 flex flex-1 flex-col items-center pt-[13vh] text-center sm:pt-[16vh]"
       >
         <motion.p {...fadeUp(0.2)} className="label-mono max-w-xs text-mist sm:max-w-none">
-          <span className="mr-3 inline-flex align-middle">
-            <StatusDot colorClassName="bg-nebula" />
-          </span>
           {content.eyebrow}
         </motion.p>
 

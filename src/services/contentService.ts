@@ -1,6 +1,7 @@
 import { homeContent } from "@/data/home";
+import { pillarPages } from "@/data/pillarPages";
 import { siteInfo } from "@/data/site";
-import type { HomeContent, Pillar, SiteInfo } from "@/types/content";
+import type { HomeContent, NewsItem, Pillar, PillarPageContent, SiteInfo } from "@/types/content";
 
 /**
  * Content service layer.
@@ -22,4 +23,13 @@ export async function getPillars(): Promise<Pillar[]> {
 
 export async function getPillarBySlug(slug: string): Promise<Pillar | null> {
   return homeContent.pillars.find((pillar) => pillar.slug === slug) ?? null;
+}
+
+export async function getPillarPage(slug: string): Promise<PillarPageContent | null> {
+  return pillarPages.find((page) => page.slug === slug) ?? null;
+}
+
+/** All stories, newest first. */
+export async function getNews(): Promise<NewsItem[]> {
+  return [...homeContent.news].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
 }

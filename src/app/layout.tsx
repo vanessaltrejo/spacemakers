@@ -27,9 +27,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="es"
+      // Next 16 no longer disables CSS smooth scrolling on route changes unless this is set,
+      // which left pages stranded mid-scroll after navigating. Anchors still scroll smoothly.
+      data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
-      <body className="min-h-svh bg-void font-sans">
+      {/* Browser extensions (e.g. ColorZilla's cz-shortcut-listen) add attributes to <body> before
+          React hydrates; suppressHydrationWarning only silences attribute mismatches on this element. */}
+      <body suppressHydrationWarning className="min-h-svh bg-void font-sans">
         <MotionProvider>{children}</MotionProvider>
       </body>
     </html>
