@@ -6,7 +6,7 @@ import { login, type LoginFormState } from "@/actions/auth";
 import { BorderBeam } from "@/components/ui/BorderBeam";
 
 const inputClasses =
-  "h-10 w-full rounded-md border border-line-strong bg-hull-soft px-3 text-sm text-starlight placeholder:text-mist transition-colors focus:border-gold focus:outline-none";
+  "h-11 w-full rounded-md border border-line-strong bg-hull-soft px-3 text-base text-starlight md:h-10 md:text-sm placeholder:text-mist transition-colors focus:border-gold focus:outline-none";
 
 const initialState: LoginFormState = {};
 
@@ -78,14 +78,14 @@ export function LoginCard() {
           {/* Inert on purpose: the sign-up flow (/signup) doesn't exist yet. */}
           <button
             type="button"
-            className="inline-flex h-10 items-center justify-center rounded-full border border-line-strong px-5 text-sm font-medium tracking-tight text-starlight transition-colors hover:border-gold hover:text-gold"
+            className="inline-flex h-11 items-center justify-center rounded-full border border-line-strong px-5 md:h-10 text-sm font-medium tracking-tight text-starlight transition-colors hover:border-gold hover:text-gold"
           >
             Registrarme
           </button>
           <button
             type="submit"
             disabled={isPending}
-            className="inline-flex h-10 items-center justify-center rounded-full bg-gold px-5 text-sm font-medium tracking-tight text-void transition-colors hover:bg-cream disabled:cursor-wait disabled:opacity-70"
+            className="inline-flex h-11 items-center justify-center rounded-full bg-gold px-5 md:h-10 text-sm font-medium tracking-tight text-void transition-colors hover:bg-cream disabled:cursor-wait disabled:opacity-70"
           >
             {isPending ? "Entrando…" : "Entrar"}
           </button>

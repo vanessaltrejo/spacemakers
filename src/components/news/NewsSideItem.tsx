@@ -23,7 +23,7 @@ export function NewsSideItem({ item, flushTop = false, onSelect }: NewsSideItemP
       type="button"
       onClick={() => onSelect(item.id)}
       aria-label={`Ver en grande: ${item.title}`}
-      className={`group grid w-full cursor-pointer grid-cols-[13rem_1fr] items-center gap-5 pb-5 text-left sm:grid-cols-[15rem_1fr] ${
+      className={`group grid w-full cursor-pointer grid-cols-[7.5rem_1fr] items-center gap-4 pb-5 text-left min-[480px]:grid-cols-[13rem_1fr] min-[480px]:gap-5 sm:grid-cols-[15rem_1fr] ${
         flushTop ? "" : "pt-5"
       }`}
     >
@@ -41,10 +41,10 @@ export function NewsSideItem({ item, flushTop = false, onSelect }: NewsSideItemP
         <time dateTime={item.publishedAt} className={`label-mono block ${toneStyle.text}`}>
           {formatShortDate(item.publishedAt)}
         </time>
-        <span className="mt-2 block text-xl leading-snug font-normal tracking-tight text-starlight transition-colors group-hover:text-gold sm:text-2xl">
+        <span className="mt-2 block text-body leading-snug font-normal tracking-tight text-starlight transition-colors group-hover:text-gold min-[480px]:text-h2">
           {item.title}
         </span>
-        <span className="mt-1 block text-sm text-mist">{item.location}</span>
+        <span className="mt-1 block text-caption text-mist">{item.location}</span>
       </motion.div>
     </button>
   );

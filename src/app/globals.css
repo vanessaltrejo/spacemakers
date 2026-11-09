@@ -6,9 +6,32 @@
 
 /* Tailwind exposes every token as a utility (bg-gold, text-ember, border-line, ...). */
 @theme {
-  /* Animations */
+  /* Radius 0 everywhere (rounded-full stays available for the few true circles). */
+  --radius-xs: 0;
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-2xl: 0;
+  --radius-3xl: 0;
+  --radius-4xl: 0;
+
+  /* Type scale: display, h1, h2, body, caption (+ label-mono utility below). */
+  --text-display: clamp(2rem, 1.2rem + 3.6vw, 4.5rem);
+  --text-display--line-height: 1.05;
+  --text-display--letter-spacing: -0.02em;
+  --text-h1: clamp(1.5rem, 1.1rem + 1.6vw, 2.5rem);
+  --text-h1--line-height: 1.15;
+  --text-h1--letter-spacing: -0.01em;
+  --text-h2: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+  --text-h2--line-height: 1.25;
+  --text-body: 1rem;
+  --text-body--line-height: 1.6;
+  --text-caption: 0.875rem;
+  --text-caption--line-height: 1.5;
+
+  /* Hero typewriter cursor and the partner logo ticker animate. */
   --animate-marquee: marquee 40s linear infinite;
-  --animate-flare: flare 6s ease-in-out infinite;
   --animate-orbit: orbit 40s linear infinite;
   --animate-blink: blink 2s ease-in-out infinite;
 
@@ -18,18 +41,6 @@
     }
     to {
       transform: translateX(-50%);
-    }
-  }
-
-  @keyframes flare {
-    0%,
-    100% {
-      opacity: 0.75;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 1;
-      transform: scale(1.08);
     }
   }
 
@@ -54,7 +65,7 @@
 @utility container-page {
   margin-inline: auto;
   width: 100%;
-  max-width: 1760px;
+  max-width: 1920px;
   padding-inline: 1rem;
 
   @media (width >= 40rem) {
@@ -62,7 +73,7 @@
   }
 
   @media (width >= 64rem) {
-    padding-inline: 2.5rem;
+    padding-inline: 2rem;
   }
 }
 
@@ -74,32 +85,40 @@
   background-size: 72px 72px;
 }
 
-/* Small monospace label — the "telemetry" voice of the UI. */
+/* Michroma headline in sentence case, used for hero, page titles and large headings. */
+@utility font-headline {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* Small monospace label (data, dates, categories). Sentence case. */
 @utility label-mono {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  line-height: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   letter-spacing: 0.02em;
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 4rem;
 }
 
 body {
   background: var(--color-void);
   color: var(--color-starlight);
-  font-feature-settings: "ss01", "cv11";
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: 1.65;
 }
 
 ::selection {
-  background: var(--color-nebula);
-  color: var(--color-cream);
+  background: var(--color-gold);
+  color: var(--color-void);
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-orbit-bright);
+  outline: 2px solid var(--color-gold);
   outline-offset: 3px;
 }
 

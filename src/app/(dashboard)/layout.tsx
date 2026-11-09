@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { DashboardShell } from "@/features/rover-dashboard/components/DashboardShell";
-import { fontVariables } from "@/lib/fonts";
+import { DashboardSidebar } from "@/features/rover-dashboard/components/DashboardSidebar";
+import { dashboardFontVariables } from "@/lib/fonts";
 import { getSession } from "@/lib/auth/session";
 import "@/features/rover-dashboard/styles/dashboard.css";
 
@@ -22,9 +23,9 @@ export default async function DashboardRootLayout({ children }: LayoutProps<"/">
   const session = await getSession();
 
   return (
-    <html lang="es" className={`dark ${fontVariables} antialiased`}>
+    <html lang="es" className={`dark ${dashboardFontVariables} antialiased`}>
       <body suppressHydrationWarning>
-        <DashboardShell username={session?.username ?? null}>{children}</DashboardShell>
+        <DashboardShell sidebar={<DashboardSidebar username={session?.username ?? null} />}>{children}</DashboardShell>
       </body>
     </html>
   );

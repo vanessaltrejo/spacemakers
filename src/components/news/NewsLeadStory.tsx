@@ -16,15 +16,15 @@ export function NewsLeadStory({ item }: NewsLeadStoryProps) {
   return (
     <article className="pt-5">
       <NewsCategoryTag category={item.category} />
-      <h3 className="mt-3 text-3xl font-normal tracking-tight text-starlight sm:text-4xl">{item.title}</h3>
+      <h3 className="mt-3 text-h1 leading-tight font-normal text-starlight">{item.title}</h3>
 
       <div className={`mt-4 grid gap-6 ${hasDetails ? "md:grid-cols-[minmax(0,1fr)_15rem] md:gap-10" : ""}`}>
-        <div className="max-w-2xl space-y-3 leading-relaxed text-mist">
-          {item.body.slice(0, DESCRIPTION_PARAGRAPHS).map((paragraph) => (
+        <div className="max-w-2xl space-y-3 text-body text-mist">
+          {(item.body ?? [item.excerpt]).slice(0, DESCRIPTION_PARAGRAPHS).map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
         </div>
-        {item.details && <NewsDetailList details={item.details} category={item.category} />}
+        {item.details && <NewsDetailList details={item.details} />}
       </div>
     </article>
   );

@@ -199,35 +199,27 @@ strong, b, th { font-weight: 400; }
 }
 
 .topbar {
-  min-height: 5rem;
-  display: grid;
-  grid-template-columns: 1fr auto;
+  min-height: 4.25rem;
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 1.25rem;
-  padding: 1rem var(--page-gutter);
+  gap: 0.75rem 1.75rem;
+  padding: 0.85rem var(--page-gutter);
   color: #ffffff;
   background: #000000;
   border-bottom: 1px solid rgba(237, 186, 59, 0.35);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.8), 0 1px 0 rgba(237, 186, 59, 0.15);
   position: relative;
-  z-index: 10;
+  z-index: 1;
 }
 
 .topbar h1 {
+  min-width: 0;
   font-family: var(--font-heading);
-  font-size: clamp(1.35rem, 2vw, 1.95rem);
+  font-size: clamp(1.1rem, 1.6vw, 1.5rem);
+  line-height: 1.2;
   font-weight: 700;
   letter-spacing: -.03em;
   color: #ffffff;
-}
-
-.eyebrow {
-  font-size: .75rem;
-  line-height: 1.2;
-  font-weight: 400;
-  letter-spacing: .14em;
-  color: #edba3b;
-  font-family: var(--font-mono-ui);
 }
 
 .topbar .eyebrow {
@@ -237,23 +229,16 @@ strong, b, th { font-weight: 400; }
 .sync-cluster {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.85rem;
+  margin-left: auto;
 }
-.sync-copy {
-  display: flex;
+.sync-updated {
+  display: inline-flex;
   align-items: center;
-  gap: .65rem;
-  font-size: .9rem;
-}
-.sync-copy div {
-  display: grid;
-}
-.sync-copy strong {
-  color: #e8ebef;
-}
-.sync-copy small {
+  gap: 0.45rem;
+  font-size: 0.75rem;
   color: #8d949e;
-  font-size: .76rem;
+  white-space: nowrap;
 }
 .connection-dot {
   width: .62rem;
@@ -266,7 +251,9 @@ strong, b, th { font-weight: 400; }
   color: #e8ebef;
   border: 1px solid rgba(237, 186, 59, 0.35);
   background: #0d0d0d;
-  min-height: 2.65rem;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
   transition: all .16s ease;
 }
 .refresh-button:hover {
@@ -279,18 +266,11 @@ strong, b, th { font-weight: 400; }
 /* Workspace Layout */
 .workspace {
   width: 100%;
-  padding: var(--page-gutter);
+  padding: 1.5rem var(--page-gutter) var(--page-gutter);
   background: #000000;
 }
 
 /* Section Header & Unified Tabs */
-.section-heading {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin-bottom: 1.25rem;
-}
-
 /* View Tabs — Consistent Space Makers Gold Navigation with Smooth Sliding Pill */
 .view-tabs {
   position: relative;
@@ -337,6 +317,18 @@ strong, b, th { font-weight: 400; }
   align-items: center;
   gap: .45rem;
 }
+.topbar .view-tabs {
+  padding: 0.2rem;
+  flex-wrap: nowrap;
+  border-radius: 0.5rem;
+}
+.topbar .view-tabs button {
+  min-height: 2rem;
+  padding-inline: 1rem;
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
 .view-tabs button svg {
   flex-shrink: 0;
   transition: color .2s ease, transform .2s ease;
@@ -685,15 +677,19 @@ strong, b, th { font-weight: 400; }
 
 /* Filter Bar in Space Makers Style */
 .filter-bar {
-  display: grid;
-  grid-template-columns: minmax(250px, 1fr) 9rem 11rem minmax(13rem, auto) auto;
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: .65rem;
   padding: .8rem 1rem;
   border-bottom: 1px solid rgb(255 255 255 / 0.18);
   background: #0f0f0f;
 }
+.filter-bar .search-field {
+  flex: 1 1 16rem;
+}
 .filter-bar [data-slot='native-select-wrapper'] {
+  flex: 0 1 12rem;
   width: 100%;
 }
 .filter-bar select,
@@ -1950,18 +1946,11 @@ strong, b, th { font-weight: 400; }
 
 /* Responsive Media Queries */
 @media (max-width: 920px) {
-  .section-heading {
-    align-items: stretch;
-    flex-direction: column;
-  }
-  .summary-grid {
+    .summary-grid {
     grid-template-columns: 1fr;
   }
   .metric-rail {
     grid-template-columns: repeat(3, 1fr);
-  }
-  .sync-copy {
-    display: none;
   }
   .filter-bar {
     grid-template-columns: 1fr 1fr;
@@ -2004,13 +1993,6 @@ strong, b, th { font-weight: 400; }
 }
 
 @media (max-width: 680px) {
-  .topbar {
-    grid-template-columns: 1fr;
-  }
-  .sync-cluster {
-    grid-column: 1 / -1;
-    justify-content: flex-end;
-  }
   .metric-rail {
     grid-template-columns: 1fr;
   }
@@ -2667,122 +2649,14 @@ strong, b, th { font-weight: 400; }
 }
 
 /* ==========================================================================
-   Admin Authentication Guard (Password Gate: admin123)
-   ========================================================================== */
-.admin-lock-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 1.5rem 0.5rem;
-  gap: 0.85rem;
-}
-.lock-icon-wrapper {
-  width: 4.2rem;
-  height: 4.2rem;
-  border-radius: 999px;
-  background: radial-gradient(circle, rgba(237, 186, 59, 0.22) 0%, rgba(237, 186, 59, 0.04) 70%);
-  border: 1.5px solid rgba(237, 186, 59, 0.4);
-  display: grid;
-  place-items: center;
-  box-shadow: 0 0 20px rgba(237, 186, 59, 0.2);
-}
-.lock-icon-wrapper svg {
-  color: #f6cf72;
-}
-.admin-lock-card h5 {
-  margin: 0;
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #ffffff;
-}
-.admin-lock-desc {
-  margin: 0;
-  max-width: 25rem;
-  font-size: 0.88rem;
-  line-height: 1.5;
-  color: #9c9c94;
-}
-.admin-password-form {
-  width: 100%;
-  max-width: 22rem;
-  margin-top: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
-}
-.admin-pwd-input {
-  text-align: center;
-  font-size: 1rem;
-  letter-spacing: 0.15em;
-  background: #10151d;
-  border: 1px solid #2f2f2c;
-  color: #ffffff;
-  padding: 0.65rem 1rem;
-  border-radius: 0.5rem;
-}
-.admin-pwd-input:focus {
-  border-color: #edba3b;
-  box-shadow: 0 0 0 2px rgba(237, 186, 59, 0.35);
-  outline: none;
-}
-.admin-error-banner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.45rem;
-  padding: 0.55rem 0.85rem;
-  background: rgba(239, 68, 68, 0.12);
-  border: 1px solid rgba(239, 68, 68, 0.35);
-  border-radius: 0.4rem;
-  color: #f87171;
-  font-size: 0.78rem;
-  text-align: left;
-}
-.admin-status-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.45rem 0.75rem;
-  background: rgba(16, 185, 129, 0.08);
-  border: 1px solid rgba(16, 185, 129, 0.25);
-  border-radius: 0.4rem;
-}
-.admin-active-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  color: #34d399;
-  font-size: 0.75rem;
-  font-weight: 400;
-  font-family: var(--font-mono-ui);
-}
-.admin-logout-link {
-  background: none;
-  border: none;
-  color: #8d949e;
-  font-size: 0.72rem;
-  text-decoration: underline;
-  cursor: pointer;
-  transition: color 0.15s ease;
-}
-.admin-logout-link:hover {
-  color: #ef4444;
-}
-
-/* ==========================================================================
    Rover Mission Control & Multi-Area Navigation (URC 2027)
    ========================================================================== */
-/* Area chips: one compact row, no horizontal scroll. Chips share the free space (up to a cap)
-   and only shrink (icon hides, label ellipsizes) when the screen can't fit all 11. */
+/* Area chips: one compact row, no horizontal scroll. Nothing in the top block is sticky: the title,
+   the area bar and the tabs all scroll away together, and the sidebar stays as the fixed navigation. */
 .area-nav-strip {
-  position: sticky;
-  top: 0;
-  z-index: 40;
-  /* Opaque on purpose: a blurred sticky bar repaints on every scroll frame. */
   background: #080b10;
   border-bottom: 1px solid rgb(255 255 255 / 0.18);
-  padding: 0.5rem 0;
+  padding: 0.8rem 0;
 }
 .area-nav-scroll {
   display: flex;
@@ -2820,7 +2694,7 @@ strong, b, th { font-weight: 400; }
   flex-shrink: 0;
 }
 /* Tighter screens: drop the icons and tighten spacing first so the names stay readable. */
-@media (max-width: 1500px) {
+@media (max-width: 1649px) {
   .area-chip > svg { display: none; }
   .area-nav-scroll { gap: 0.25rem; }
   .area-chip {
@@ -3411,5 +3285,111 @@ strong, b, th { font-weight: 400; }
   color: #edba3b;
 }
 
+/* ==========================================================================
+   Phones & tablets. Desktop (>= 1024px) is untouched by everything below.
+   ========================================================================== */
 
+/* The expanded task grid must be allowed to shrink, or long text pushes it past the screen. */
+.backlog-inline-detail {
+  grid-template-columns: minmax(0, 1fr);
+}
 
+/* Area picker used instead of the chip bar on phones. */
+.area-select-mobile {
+  display: none;
+  padding: 0 var(--page-gutter);
+}
+.area-select-mobile [data-slot='native-select-wrapper'] {
+  width: 100%;
+}
+.area-select-mobile select {
+  min-height: 2.75rem;
+  background: #10151d;
+  border: 1px solid #2c2c2c;
+  color: #ffffff;
+  font-size: 1rem;
+  border-radius: 0.45rem;
+}
+.area-select-mobile select:focus {
+  border-color: #edba3b;
+  box-shadow: 0 0 0 2px rgba(237, 186, 59, 0.3);
+  outline: none;
+}
+.area-select-mobile select option {
+  background: #10151d;
+  color: #ffffff;
+}
+
+@media (max-width: 639px) {
+  .area-select-mobile { display: block; }
+  .area-nav-scroll { display: none; }
+  .area-nav-strip { padding: 0.6rem 0; }
+
+  /* Title bar on phones: title and refresh share a line, the view tabs get their own full-width line. */
+  .topbar { gap: 0.6rem 0.75rem; padding-block: 0.7rem; }
+  .topbar h1 { order: 1; flex: 1 1 0; }
+  .sync-cluster { order: 2; margin-left: 0; gap: 0.6rem; }
+  .topbar .view-tabs { order: 3; flex: 1 0 100%; }
+  .topbar .view-tabs button { min-height: 2.5rem; flex: 1 1 0; justify-content: center; }
+  .refresh-button { width: 2.75rem; height: 2.75rem; }
+  .sync-excel-btn { min-height: 2.75rem; }
+
+  .sync-modal-overlay { padding: 0.5rem; }
+  .modal-footer { flex-wrap: wrap; }
+  .modal-footer > * { flex: 1 1 auto; }
+  .modal-footer button,
+  .modal-footer label {
+    min-height: 2.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 767px) {
+  /* The backlog is part of the page, not a scroll box inside it. */
+  .backlog-list { max-height: none; overflow: visible; }
+
+  /* Filters: search on its own line, the two selects side by side. */
+  .filter-bar .search-field { flex: 1 1 100%; }
+  .filter-bar [data-slot='native-select-wrapper'] { flex: 1 1 calc(50% - 0.35rem); }
+  .filter-bar select, .filter-bar input { font-size: 1rem; }
+
+  /* A backlog row keeps everything: title on top, then priority, status, date and owner underneath. */
+  .backlog-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 0.6rem;
+    padding: 0.85rem 0.9rem;
+  }
+  .backlog-row .row-id { order: 0; flex: 0 0 4rem; }
+  /* The title takes the rest of the first line, so priority, status, date and owner wrap to the next one. */
+  .backlog-row .row-main { order: 1; flex: 1 0 calc(100% - 6.4rem); min-width: 0; }
+  .backlog-row .row-chevron { order: 2; flex: 0 0 1.15rem; }
+  .backlog-row > [data-slot='badge'] { order: 3; display: inline-flex; }
+  .backlog-row > .state-pill { order: 4; display: inline-flex; }
+  .backlog-row .row-date { order: 5; display: flex; }
+  .backlog-row .row-owner { order: 6; display: flex; flex: 1 0 100%; }
+  .backlog-row .web-edit-pill { order: 7; }
+
+  /* Task editor: 16px fields (iOS zooms into anything smaller) and finger-sized buttons. */
+  .task-edit-panel select,
+  .task-edit-panel input:not([type='range']),
+  .task-edit-panel textarea {
+    font-size: 1rem;
+    min-height: 2.75rem;
+  }
+  .edit-actions button { min-height: 2.75rem; }
+
+  /* Small labels: never below 12px on a phone. */
+  .state-pill,
+  .web-edit-pill,
+  .edit-hint,
+  .detail-field dt,
+  .acceptance-label { font-size: 0.75rem; }
+}
+
+@media (max-width: 479px) {
+  .filter-bar [data-slot='native-select-wrapper'] { flex: 1 1 100%; }
+}

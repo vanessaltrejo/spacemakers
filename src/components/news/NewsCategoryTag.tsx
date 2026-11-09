@@ -6,15 +6,8 @@ interface NewsCategoryTagProps {
   category: NewsCategory;
 }
 
-/** Colored dot + category name, in the telemetry voice of the site. */
+/** Category name in the category color. */
 export function NewsCategoryTag({ category }: NewsCategoryTagProps) {
   const { label, tone } = newsCategories[category];
-  const toneStyle = toneStyles[tone];
-
-  return (
-    <span className={`label-mono inline-flex items-center gap-2 ${toneStyle.text}`}>
-      <span aria-hidden="true" className={`size-1.5 rounded-full ${toneStyle.background}`} />
-      {label}
-    </span>
-  );
+  return <span className={`label-mono ${toneStyles[tone].text}`}>{label}</span>;
 }

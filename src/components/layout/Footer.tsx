@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FooterNewsletter } from "@/components/layout/FooterNewsletter";
 import { Logo } from "@/components/ui/Logo";
 import { SocialIcon } from "@/components/ui/SocialIcon";
 import type { SiteInfo } from "@/types/content";
@@ -7,73 +8,61 @@ interface FooterProps {
   site: SiteInfo;
 }
 
+/** Brand, newsletter and contact in one compact band. Navigation lives in the sidebar. */
 export function Footer({ site }: FooterProps) {
-  const phoneHref = `tel:+52${site.phone.replace(/\s/g, "")}`;
+  const phoneHref = `tel:${site.phone.replace(/[^\d+]/g, "")}`;
 
   return (
-    <footer className="relative overflow-hidden border-t border-line">
+    <footer className="border-t border-line">
       <div className="container-page">
-        <div className="grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-12">
-          <div className="lg:col-span-4">
-            <a href="#" className="inline-block text-white" aria-label="SpaceMakers, volver arriba">
-              <Logo className="h-10 w-auto" />
-            </a>
-            <p className="mt-6 max-w-sm text-sm leading-relaxed text-mist">{site.description}</p>
+        <div className="grid max-w-[1560px] gap-8 py-6 lg:grid-cols-[minmax(0,25fr)_minmax(0,28fr)_minmax(0,31fr)] 2xl:grid-cols-[minmax(0,25rem)_minmax(0,28rem)_minmax(0,31rem)] lg:justify-between lg:gap-x-12">
+          <div>
+            <Link href="/" className="inline-block text-white" aria-label="Space Makers, ir al inicio">
+              <Logo className="h-7 w-auto" />
+            </Link>
+            <p className="mt-3 max-w-sm text-caption text-mist">{site.description}</p>
           </div>
 
-          <nav aria-labelledby="footer-nav-title" className="lg:col-span-2">
-            <h2 id="footer-nav-title" className="label-mono text-mist">
-              Navegación
-            </h2>
-            <ul className="mt-5 space-y-2.5 text-sm">
-              {site.navigation.map((item) => (
-                <li key={item.href}>
-                  <Link href={item.href} className="text-starlight/80 transition-colors hover:text-gold">
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          <FooterNewsletter />
 
-          <div className="lg:col-span-4">
-            <h2 className="label-mono text-mist">Contacto</h2>
-            <address className="mt-5 space-y-2.5 text-sm not-italic text-starlight/80">
-              <a href={phoneHref} className="block transition-colors hover:text-gold">
-                {site.phone}
-              </a>
-              <a href={`mailto:${site.email}`} className="block transition-colors hover:text-gold">
-                {site.email}
-              </a>
-              <p className="pt-2 text-mist">
-                {site.addressLines.map((line) => (
-                  <span key={line} className="block">
-                    {line}
-                  </span>
+          <section aria-labelledby="footer-contact">
+            <div className="flex items-center gap-5">
+              <h2 id="footer-contact" className="label-mono text-gold">
+                Contacto
+              </h2>
+              <ul className="flex items-center gap-3">
+                {site.socials.map((social) => (
+                  <li key={social.network}>
+                    <a
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={social.label}
+                      className="block opacity-90 transition-opacity hover:opacity-100"
+                    >
+                      <SocialIcon network={social.network} className="size-5" />
+                    </a>
+                  </li>
                 ))}
+              </ul>
+            </div>
+            <address className="mt-3 space-y-1 text-caption not-italic text-starlight/80">
+              <p className="flex flex-wrap items-center gap-x-2">
+                <a href={phoneHref} className="whitespace-nowrap transition-colors hover:text-gold">
+                  {site.phone}
+                </a>
+                <span aria-hidden="true" className="text-mist">
+                  ·
+                </span>
+                <a href={`mailto:${site.email}`} className="break-all transition-colors hover:text-gold">
+                  {site.email}
+                </a>
               </p>
+              <p className="text-mist">{site.addressLines.join(" ")}</p>
             </address>
-          </div>
-
-          <div className="lg:col-span-2">
-            <h2 className="label-mono text-mist">Redes</h2>
-            <ul className="mt-5 flex gap-3">
-              {site.socials.map((social) => (
-                <li key={social.network}>
-                  <a
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={social.label}
-                    className="flex size-10 items-center justify-center rounded-full border border-line-strong text-starlight transition-colors hover:border-gold hover:text-gold"
-                  >
-                    <SocialIcon network={social.network} className="size-4" />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          </section>
         </div>
+
       </div>
     </footer>
   );

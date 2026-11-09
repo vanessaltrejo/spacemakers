@@ -1,21 +1,22 @@
-import { Reveal } from "@/components/ui/Reveal";
+import { Section } from "@/components/ui/Section";
+import type { AccentTone } from "@/types/content";
 
 interface OverviewProps {
   paragraphs: string[];
+  tone: AccentTone;
 }
 
-export function Overview({ paragraphs }: OverviewProps) {
+/** "Qué es": the first paragraph is the lead, the rest is supporting text. */
+export function Overview({ paragraphs, tone }: OverviewProps) {
   return (
-    <section aria-label="Resumen" className="container-page pt-16 lg:pt-24">
-      <div className="max-w-3xl space-y-5">
+    <Section id="overview" title="Qué es" tone={tone}>
+      <div className="max-w-3xl space-y-4">
         {paragraphs.map((paragraph, index) => (
-          <Reveal key={paragraph} delay={index * 0.1}>
-            <p className={index === 0 ? "text-2xl leading-snug font-light tracking-[-0.02em] text-starlight sm:text-3xl" : "leading-relaxed text-mist"}>
-              {paragraph}
-            </p>
-          </Reveal>
+          <p key={paragraph} className={index === 0 ? "text-h2 leading-snug font-normal text-starlight" : "text-body text-mist"}>
+            {paragraph}
+          </p>
         ))}
       </div>
-    </section>
+    </Section>
   );
 }

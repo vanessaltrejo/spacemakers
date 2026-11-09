@@ -25,7 +25,7 @@ export function JoinCta({ content }: JoinCtaProps) {
       id="unete"
       ref={sectionRef}
       aria-labelledby="join-title"
-      className="container-page scroll-mt-20 pt-12 pb-16 lg:pb-22"
+      className="container-page pt-12 pb-16 lg:pb-22"
     >
       <div className="relative overflow-hidden border border-line bg-void">
         <Starfield className="absolute inset-0 size-full" />
@@ -34,7 +34,7 @@ export function JoinCta({ content }: JoinCtaProps) {
         <motion.div
           aria-hidden="true"
           style={{ scale: marsScale, x: marsX }}
-          className="pointer-events-none absolute right-0 bottom-0 aspect-[710/545] h-[85%] origin-bottom-right opacity-35 md:h-[78%] md:opacity-100 xl:h-[92%]"
+          className="pointer-events-none absolute right-0 bottom-0 aspect-[710/545] h-[85%] origin-bottom-right opacity-35 md:h-[70%] md:opacity-100 xl:h-[80%]"
         >
           <Image
             src={content.image.src}
@@ -68,7 +68,7 @@ export function JoinCta({ content }: JoinCtaProps) {
             </p>
           </Reveal>
           <Reveal delay={0.1}>
-            <h2 id="join-title" className="text-4xl leading-[1.05] font-[350] tracking-[-0.035em] text-starlight xl:text-6xl">
+            <h2 id="join-title" className="text-[clamp(1.75rem,1.1rem+2.2vw,3rem)] leading-[1.08] font-[350] tracking-[-0.03em] text-starlight">
               {content.titleLead} <span className="text-gold">{content.titleEmphasis}</span>
             </h2>
           </Reveal>

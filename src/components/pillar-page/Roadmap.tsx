@@ -1,6 +1,5 @@
 import { toneStyles } from "@/components/pillars/toneStyles";
-import { Reveal } from "@/components/ui/Reveal";
-import { SectionHeader } from "@/components/ui/SectionHeader";
+import { Section } from "@/components/ui/Section";
 import type { AccentTone, RoadmapStatus, RoadmapStep } from "@/types/content";
 
 interface RoadmapProps {
@@ -16,38 +15,25 @@ const statusLabels: Record<RoadmapStatus, string> = {
   tbc: "Por confirmar",
 };
 
+/** Steps side by side, like stages of a mission. */
 export function Roadmap({ heading, steps, tone }: RoadmapProps) {
   const toneStyle = toneStyles[tone];
 
   return (
-    <section aria-labelledby="roadmap-title" className="container-page pt-20 lg:pt-28">
-      <SectionHeader title={heading} titleId="roadmap-title" withRule={false} />
-
-      <ol className="mt-8 border-l border-line lg:mt-10">
-        {steps.map((step, index) => {
+    <Section id="roadmap-title" title={heading} tone={tone}>
+      <ol className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        {steps.map((step) => {
           const isMuted = step.status === "tbc" || step.status === "upcoming";
           return (
-            <Reveal key={step.title} delay={index * 0.1}>
-              <li className="relative grid gap-2 pb-10 pl-8 last:pb-0 lg:grid-cols-12 lg:gap-8">
-                <span
-                  aria-hidden="true"
-                  className={`absolute top-1.5 -left-[5px] size-2.5 rounded-full ring-4 ring-void ${
-                    isMuted ? "border border-line-strong bg-void" : toneStyle.background
-                  }`}
-                />
-                <p className="label-mono text-mist lg:col-span-3">{step.when}</p>
-                <div className="lg:col-span-9">
-                  <h3 className="text-xl font-normal tracking-tight text-starlight">{step.title}</h3>
-                  <p className="mt-2 max-w-xl text-sm leading-relaxed text-mist">{step.description}</p>
-                  <p className={`label-mono mt-3 ${isMuted ? "text-mist" : toneStyle.text}`}>
-                    {statusLabels[step.status]}
-                  </p>
-                </div>
-              </li>
-            </Reveal>
+            <li key={step.title} className={`relative border bg-hull-soft p-5 ${isMuted ? "border-line" : toneStyle.border}`}>
+              <p className="label-mono text-mist">{step.when}</p>
+              <h3 className="mt-3 text-h2 text-starlight">{step.title}</h3>
+              <p className="mt-2 text-caption text-mist">{step.description}</p>
+              <p className={`label-mono mt-4 ${isMuted ? "text-mist" : toneStyle.text}`}>{statusLabels[step.status]}</p>
+            </li>
           );
         })}
       </ol>
-    </section>
+    </Section>
   );
 }

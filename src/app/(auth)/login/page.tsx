@@ -3,12 +3,12 @@ import { LoginCard } from "@/components/auth/LoginCard";
 import { Starfield } from "@/components/ui/Starfield";
 
 export const metadata: Metadata = {
-  title: "Iniciar sesión | SpaceMakers",
+  title: "Iniciar sesión | Space Makers",
 };
 
 export default function LoginPage() {
   return (
-    <div className="relative flex min-h-svh items-center justify-center overflow-hidden bg-void px-4 pt-14">
+    <div className="relative flex min-h-[calc(100svh-3.5rem)] items-center justify-center overflow-hidden bg-void px-4 md:min-h-svh">
       <Starfield className="absolute inset-0 size-full" />
       <div className="relative z-10 flex w-full justify-center">
         <LoginCard />

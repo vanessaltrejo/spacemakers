@@ -14,10 +14,36 @@ const iconPaths: Record<SocialNetwork, string> = {
     "M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z",
 };
 
+/** Brand-colored logos: Instagram gradient, Facebook blue, YouTube red. */
 export function SocialIcon({ network, className }: SocialIconProps) {
   return (
-    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden="true">
-      <path d={iconPaths[network]} />
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
+      {network === "instagram" && (
+        <>
+          <defs>
+            <linearGradient id="instagram-gradient" x1="3" y1="22" x2="21" y2="2" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stopColor="#feda75" />
+              <stop offset="0.25" stopColor="#fa7e1e" />
+              <stop offset="0.5" stopColor="#d62976" />
+              <stop offset="0.75" stopColor="#962fbf" />
+              <stop offset="1" stopColor="#4f5bd5" />
+            </linearGradient>
+          </defs>
+          <path d={iconPaths.instagram} fill="url(#instagram-gradient)" />
+        </>
+      )}
+      {network === "facebook" && (
+        <>
+          <circle cx="12" cy="12" r="11" fill="#fff" />
+          <path d={iconPaths.facebook} fill="#1877f2" />
+        </>
+      )}
+      {network === "youtube" && (
+        <>
+          <path d="M9.6 8.4v7.2l6.2-3.6z" fill="#fff" />
+          <path d={iconPaths.youtube} fill="#ff0000" />
+        </>
+      )}
     </svg>
   );
 }

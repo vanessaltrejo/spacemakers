@@ -6,17 +6,17 @@ interface PartnersMarqueeProps {
 }
 
 /**
- * Infinite, edge-faded ticker of allied institutions. Pauses on hover.
- * Logos sit on the black page. Those whose original colors vanish on black (Kyutech wordmark,
- * AEM greys, URC outline) were recolored in /public/logos; the rest are untouched.
- */
-/**
  * The track holds 2 × SETS_PER_HALF copies of the partner list and slides by exactly half of
  * its width, so the loop is seamless. Each half must be wider than the viewport, otherwise a
  * gap shows up before the loop restarts; 4 copies cover screens of several thousand pixels.
  */
 const SETS_PER_HALF = 4;
 
+/**
+ * Infinite, edge-faded ticker of allied institutions. Pauses on hover.
+ * Logos whose original colors vanish on black (Kyutech wordmark, AEM greys, URC outline)
+ * were recolored in /public/logos.
+ */
 export function PartnersMarquee({ partners }: PartnersMarqueeProps) {
   const loop = Array.from({ length: SETS_PER_HALF * 2 }, () => partners).flat();
   const separatorColors = ["text-nebula", "text-ember", "text-orbit-bright", "text-lime"] as const;
@@ -46,7 +46,7 @@ export function PartnersMarquee({ partners }: PartnersMarqueeProps) {
                 </span>
                 <span
                   aria-hidden="true"
-                  className={`mx-12 font-mono text-sm ${separatorColors[index % separatorColors.length]}`}
+                  className={`mx-12 font-mono text-caption ${separatorColors[index % separatorColors.length]}`}
                 >
                   ✦
                 </span>

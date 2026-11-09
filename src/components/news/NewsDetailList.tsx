@@ -1,10 +1,7 @@
-import { toneStyles } from "@/components/pillars/toneStyles";
-import { newsCategories } from "@/lib/newsCategories";
-import type { NewsCategory, NewsDetail } from "@/types/content";
+import type { NewsDetail } from "@/types/content";
 
 interface NewsDetailListProps {
   details: NewsDetail[];
-  category: NewsCategory;
 }
 
 const iconPaths: Record<NewsDetail["kind"], string[]> = {
@@ -20,18 +17,16 @@ const mapSearchUrl = (query: string): string =>
   `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 
 /** Icon + text rows (place, link, schedule). Rows with a destination are links. */
-export function NewsDetailList({ details, category }: NewsDetailListProps) {
-  const toneStyle = toneStyles[newsCategories[category].tone];
-
+export function NewsDetailList({ details }: NewsDetailListProps) {
   return (
-    <ul className="space-y-3 text-sm">
+    <ul className="space-y-3 text-caption">
       {details.map((detail) => {
         const href = detail.href ?? (detail.kind === "location" ? mapSearchUrl(detail.label) : undefined);
         const content = (
           <>
             <svg
               viewBox="0 0 24 24"
-              className={`mt-0.5 size-4 shrink-0 ${toneStyle.text}`}
+              className="mt-0.5 size-4 shrink-0 text-gold"
               fill="none"
               stroke="currentColor"
               strokeWidth="1.6"
@@ -54,7 +49,7 @@ export function NewsDetailList({ details, category }: NewsDetailListProps) {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex gap-3 text-starlight/90 underline decoration-line-strong underline-offset-4 transition-colors hover:text-gold"
+                className="flex gap-3 py-1 text-starlight/90 underline decoration-line-strong underline-offset-4 transition-colors hover:text-gold sm:py-0"
               >
                 {content}
               </a>

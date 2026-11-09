@@ -6,7 +6,7 @@ import type { PillarPageContent } from "@/types/content";
  * Provenance of the information (researched October 2026):
  *  - VERIFIED: ISSSP 2024 result, team members and advisors (Conecta Tec / MVS Noticias),
  *    URC format, dates and Mexican entries (Mars Society), Kyutech test facilities
- *    (UNOOSA / Kyutech), SpaceMakers roles and bio (@spacemakers.mty).
+ *    (UNOOSA / Kyutech), Space Makers roles and bio (@spacemakers.mty).
  *  - FROM THE GROUP'S OWN MOCKUP (not independently verifiable online): the "Ares" rover name,
  *    the "Aurora" 3U / LEO 410 km concept and the Kyutech TVAC / vibration collaboration.
  *    Items marked `TODO(confirm)` must be confirmed by the team before going public.
@@ -14,9 +14,16 @@ import type { PillarPageContent } from "@/types/content";
 export const pillarPages: PillarPageContent[] = [
   {
     slug: "rover",
+    status: "active",
+    gallery: [
+      { src: "/images/rover-ares.webp", alt: "Render del rover Ares con ruedas iluminadas sobre terreno marciano" },
+      { src: "/images/news-urc.webp", alt: "Rover naranja con brazo robótico en el desierto del University Rover Challenge" },
+      { src: "/images/mars.webp", alt: "Superficie del planeta Marte" },
+    ],
+    partnerIds: ["urc", "tec", "fime"],
     tagline: "Detección biológica in situ y navegación autónoma en terreno análogo a Marte.",
     overview: [
-      "La división de rovers de SpaceMakers —inscrita como «Space Makers Rovers Division» en el University Rover Challenge 2023— desarrolla un vehículo todo-terreno para competir en la mayor competencia universitaria de rovers marcianos.",
+      "La división de rovers de Space Makers —inscrita como «Space Makers Rovers Division» en el University Rover Challenge 2023— desarrolla un vehículo todo-terreno para competir en la mayor competencia universitaria de rovers marcianos.",
       "El URC lo organiza la Mars Society cada verano en la Mars Desert Research Station, en el desierto de Utah, un sitio elegido por su parecido geológico y de suelo con Marte.",
     ],
     facts: [
@@ -30,7 +37,6 @@ export const pillarPages: PillarPageContent[] = [
         kind: "info",
         heading: "Lo que un rover debe lograr en Utah",
         intro: "Las cuatro misiones clásicas del University Rover Challenge. Cada una exige una disciplina distinta del equipo.",
-        showIndex: true,
         items: [
           {
             title: "Misión científica",
@@ -52,9 +58,8 @@ export const pillarPages: PillarPageContent[] = [
       },
       {
         kind: "info",
-        heading: "Perfiles que necesita esta misión",
-        intro: "Un rover es un trabajo de varias disciplinas a la vez. Estos son los perfiles que buscamos para la tripulación.",
-        showIndex: false,
+        heading: "Las disciplinas detrás del rover",
+        intro: "Un rover es un trabajo de varias disciplinas a la vez. Estas son las áreas que lo hacen posible.",
         items: [
           { title: "Aviónica y electrónica", body: "Potencia, sensores y control de motores del vehículo." },
           { title: "Visión computacional", body: "Percepción del entorno para la navegación autónoma." },
@@ -74,7 +79,7 @@ export const pillarPages: PillarPageContent[] = [
       {
         // TODO(confirm): the team must confirm it is registering for URC 2027.
         when: "Fecha por definir",
-        title: "Inscripción de SpaceMakers",
+        title: "Inscripción de Space Makers",
         description: "El equipo confirmará su participación y el estado del rover Ares.",
         status: "tbc",
       },
@@ -93,9 +98,16 @@ export const pillarPages: PillarPageContent[] = [
   },
   {
     slug: "satelites",
+    status: "development",
+    gallery: [
+      { src: "/images/satellite-aurora.webp", alt: "Render de un nanosatélite orbitando sobre la Tierra" },
+      { src: "/images/hero-earth.webp", alt: "La Tierra vista desde la órbita baja" },
+      { src: "/images/crew.webp", alt: "Integrantes del grupo dentro de una cápsula espacial" },
+    ],
+    partnerIds: ["tec", "isssp", "aem"],
     tagline: "Nanosatélites 3U para telemetría climática y protocolos de comunicación entre satélites.",
     overview: [
-      "La división de satélites de SpaceMakers trabaja en una plataforma CubeSat 3U —un nanosatélite de aproximadamente 10 × 10 × 34 cm— pensada para medir variables climáticas y el estrés hídrico desde órbita baja.",
+      "La división de satélites de Space Makers trabaja en una plataforma CubeSat 3U —un nanosatélite de aproximadamente 10 × 10 × 34 cm— pensada para medir variables climáticas y el estrés hídrico desde órbita baja.",
       "En software y comunicaciones, el grupo ya tiene un reconocimiento internacional: un protocolo para enjambres de satélites que quedó en tercer lugar mundial en Hong Kong.",
     ],
     facts: [
@@ -109,8 +121,7 @@ export const pillarPages: PillarPageContent[] = [
       {
         kind: "info",
         heading: "Anatomía de un nanosatélite",
-        intro: "Los subsistemas típicos de un CubeSat 3U. SpaceMakers cuenta con liderazgo dedicado de proyecto y de ADCS.",
-        showIndex: true,
+        intro: "Los subsistemas típicos de un CubeSat 3U. Space Makers cuenta con liderazgo dedicado de proyecto y de ADCS.",
         items: [
           { title: "Estructura", body: "El chasis que aloja todo dentro de un volumen muy reducido y resiste el lanzamiento." },
           { title: "Energía", body: "Paneles solares y baterías que mantienen vivo al satélite en cada órbita." },
@@ -127,7 +138,7 @@ export const pillarPages: PillarPageContent[] = [
         kind: "story",
         heading: "Un protocolo inspirado en hormigas",
         paragraphs: [
-          "SpaceMakers obtuvo el tercer lugar en el International Space Science and Scientific Payload Competition (ISSSP), celebrado en Hong Kong en noviembre de 2024. Compitieron 200 equipos, 30 llegaron a la final y el grupo fue el único equipo de América en ella.",
+          "Space Makers obtuvo el tercer lugar en el International Space Science and Scientific Payload Competition (ISSSP), celebrado en Hong Kong en noviembre de 2024. Compitieron 200 equipos, 30 llegaron a la final y el grupo fue el único equipo de América en ella.",
           "Su propuesta es un protocolo de comunicación para enjambres de satélites: optimiza el mapeo de topología y determina las rutas más eficientes para transmitir datos entre satélites. Se inspira en cómo las hormigas encuentran el camino óptimo, y nació del trabajo académico de Rigel de Jesús con el profesor César Vargas en la concentración de Tecnologías Aeroespaciales del Tec.",
         ],
         figures: [
@@ -141,7 +152,6 @@ export const pillarPages: PillarPageContent[] = [
         kind: "info",
         heading: "El equipo detrás del protocolo",
         intro: "Cinco estudiantes de disciplinas distintas, con asesoría de César Vargas y Paloma González.",
-        showIndex: false,
         items: [
           { title: "Rigel de Jesús", body: "Ingeniería Electrónica" },
           { title: "Sofía Cavazos", body: "Ingeniería Mecatrónica" },
@@ -182,16 +192,22 @@ export const pillarPages: PillarPageContent[] = [
         label: "MVS Noticias · Estudiantes del Tec logran tercer lugar en concurso de ciencia espacial",
         href: "https://mvsnoticias.com/nuevo-leon/2024/11/27/estudiantes-del-tec-de-monterrey-logran-tercer-lugar-en-concurso-de-ciencia-espacial-en-china-661401.html",
       },
-      { label: "SpaceMakers en Instagram (@spacemakers.mty)", href: "https://www.instagram.com/spacemakers.mty/" },
+      { label: "Space Makers en Instagram (@spacemakers.mty)", href: "https://www.instagram.com/spacemakers.mty/" },
     ],
   },
   {
     slug: "kyutech",
+    status: "development",
+    gallery: [
+      { src: "/images/kyutech-team.webp", alt: "Equipo de estudiantes posando con robots frente a un edificio en Japón" },
+      { src: "/images/satellite-aurora.webp", alt: "Render de un nanosatélite orbitando sobre la Tierra" },
+    ],
+    partnerIds: ["kyutech", "tec"],
     tagline: "Ensayos de termo-vacío y vibración con el Kyushu Institute of Technology, en Japón.",
     overview: [
       "El Kyushu Institute of Technology (Kyutech), en Kitakyushu, es una referencia mundial en nanosatélites: su Center of Nanosatellite Testing (CeNT), activo desde 2010, ofrece pruebas de vibración, choque, termo-vacío, ciclado térmico y compatibilidad electromagnética para satélites de hasta 50 cm.",
       // TODO(confirm): the collaboration below comes from the group's mockup; no public record was found.
-      "Para SpaceMakers, esta alianza es la ruta para validar hardware bajo condiciones de lanzamiento y de vacío térmico antes de volar.",
+      "Para Space Makers, esta alianza es la ruta para validar hardware bajo condiciones de lanzamiento y de vacío térmico antes de volar.",
     ],
     facts: [
       { label: "Sede", value: "Kitakyushu, Japón" },
@@ -204,7 +220,6 @@ export const pillarPages: PillarPageContent[] = [
         kind: "info",
         heading: "Qué se prueba antes de volar",
         intro: "Un satélite no se lanza sin pasar por estos ensayos. Son los que ofrece el centro de pruebas de Kyutech.",
-        showIndex: true,
         items: [
           { title: "Termo-vacío (TVAC)", body: "Reproduce el vacío y los ciclos extremos de temperatura del espacio sobre el hardware completo." },
           { title: "Vibración", body: "Somete al satélite a las cargas mecánicas del lanzamiento para comprobar que sobrevive al cohete." },
@@ -218,7 +233,6 @@ export const pillarPages: PillarPageContent[] = [
         kind: "info",
         heading: "Un camino que México ya recorrió",
         intro: "Kyutech forma ingenieros espaciales de todo el mundo y ya ha recibido proyectos universitarios mexicanos.",
-        showIndex: false,
         items: [
           {
             title: "Programa BIRDS",

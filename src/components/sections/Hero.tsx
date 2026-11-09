@@ -35,7 +35,7 @@ export function Hero({ content }: HeroProps) {
       id="inicio"
       ref={sectionRef}
       aria-labelledby="hero-title"
-      className="relative flex h-svh min-h-[620px] flex-col overflow-hidden bg-void pt-14"
+      className="relative flex h-svh min-h-[620px] flex-col overflow-hidden bg-void"
     >
       <Starfield className="absolute inset-0 size-full" />
 
@@ -73,7 +73,7 @@ export function Hero({ content }: HeroProps) {
 
         <h1
           id="hero-title"
-          className="mt-6 text-5xl font-[350] tracking-[-0.045em] text-gold sm:text-6xl lg:text-[5vw] lg:whitespace-nowrap"
+          className="font-headline mt-6 text-[clamp(1.5rem,1rem+3.2vw,3.5rem)] leading-tight tracking-normal text-gold"
         >
           <motion.span
             className="block"

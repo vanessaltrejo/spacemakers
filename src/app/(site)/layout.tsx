@@ -1,26 +1,14 @@
-import { Footer } from "@/components/layout/Footer";
-import { Navbar } from "@/components/layout/Navbar";
 import { SiteDocument, siteMetadata, siteViewport } from "@/components/layout/SiteDocument";
-import { getSiteInfo } from "@/services/contentService";
+import { SiteFrame } from "@/components/layout/SiteFrame";
 
 export const metadata = siteMetadata;
 export const viewport = siteViewport;
 
-/** Root layout for every public page: navbar + footer. */
-export default async function SiteLayout({ children }: LayoutProps<"/">) {
-  const site = await getSiteInfo();
-
+/** Root layout for every public page. */
+export default function SiteLayout({ children }: LayoutProps<"/">) {
   return (
     <SiteDocument>
-      <a
-        href="#contenido"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[70] focus:bg-cream focus:px-4 focus:py-2 focus:text-void"
-      >
-        Saltar al contenido
-      </a>
-      <Navbar navigation={site.navigation} joinCta={site.joinCta} />
-      <main id="contenido">{children}</main>
-      <Footer site={site} />
+      <SiteFrame withFooter>{children}</SiteFrame>
     </SiteDocument>
   );
 }

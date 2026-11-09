@@ -7,8 +7,8 @@ import { NewsSideItem } from "@/components/news/NewsSideItem";
 import { NewsStageCover } from "@/components/news/NewsStageCover";
 import type { NewsItem } from "@/types/content";
 
-/** Distance from the viewport top under which the lead is scrolled back into view (sticky navbar). */
-const LEAD_VISIBLE_OFFSET = 80;
+/** Distance from the viewport top under which the lead is scrolled back into view (height of the mobile top bar). */
+const LEAD_VISIBLE_OFFSET = 56;
 
 interface NewsShowcaseProps {
   /** Stories to show; the first one starts as the lead. */
@@ -45,14 +45,14 @@ export function NewsShowcase({ stories }: NewsShowcaseProps) {
   if (!lead) return null;
 
   return (
-    <div className="grid gap-10 lg:grid-cols-[62fr_38fr] lg:gap-12">
+    <div className="grid grid-cols-1 gap-10 lg:grid-cols-[62fr_38fr] lg:gap-12">
       <div ref={leadRef}>
         <div className="relative aspect-[900/430]">
           <NewsStageCover key={lead.id} item={lead} priority />
         </div>
 
         {/* Every story is stacked in the same cell so the block keeps the height of the tallest one. */}
-        <div className="grid" aria-live="polite">
+        <div className="grid grid-cols-1" aria-live="polite">
           {stories.map((story) => {
             const isLead = story.id === lead.id;
             return (

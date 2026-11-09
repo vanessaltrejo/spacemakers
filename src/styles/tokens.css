@@ -11,14 +11,14 @@
   --color-hull-soft: #10151d;
 
   /* Hairlines */
-  --color-line: rgb(255 255 255 / 0.18);
+  --color-line: rgb(255 255 255 / 0.12);
   --color-line-strong: rgb(255 255 255 / 0.32);
 
   /* Text */
   --color-gold: #edba3b;
   --color-cream: #fbf3e6;
   --color-starlight: #e8ebef;
-  --color-mist: #8d949e;
+  --color-mist: #a7aeb8;
 
   /* Brand accents */
   --color-nebula: #c9356f;
@@ -30,6 +30,7 @@
   --color-mars: #e2683a;
 
   /* Typography (variables injected by next/font, see lib/fonts.ts) */
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-display: var(--font-michroma), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-space-mono), ui-monospace, monospace;
 }

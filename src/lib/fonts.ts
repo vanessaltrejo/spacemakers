@@ -1,15 +1,36 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Michroma, Space_Grotesk, Space_Mono } from "next/font/google";
 
-/** Fonts shared by the public site and the dashboard. Variable names match styles/tokens.css. */
+/** Public site fonts. Variable names match styles/tokens.css. */
 
-export const geistSans = Geist({
+export const michroma = Michroma({
+  variable: "--font-michroma",
+  weight: "400",
+  subsets: ["latin", "latin-ext"],
+});
+
+export const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  weight: ["400", "500"],
+  subsets: ["latin", "latin-ext"],
+});
+
+export const spaceMono = Space_Mono({
+  variable: "--font-space-mono",
+  weight: ["400", "700"],
+  subsets: ["latin", "latin-ext"],
+});
+
+export const siteFontVariables = `${michroma.variable} ${spaceGrotesk.variable} ${spaceMono.variable}`;
+
+/** The rover dashboard keeps Geist; it is not part of the public redesign. */
+const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
-export const geistMono = Geist_Mono({
+const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 
-export const fontVariables = `${geistSans.variable} ${geistMono.variable}`;
+export const dashboardFontVariables = `${geistSans.variable} ${geistMono.variable}`;

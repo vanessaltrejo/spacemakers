@@ -7,15 +7,13 @@ interface NewsCoverProps {
   item: NewsItem;
   sizes: string;
   priority?: boolean;
-  /** Smaller generated-cover lettering, for thumbnails. */
-  compact?: boolean;
 }
 
 /**
  * Fills its (relative, sized) parent with the story photo, or — when there is none —
  * a generated cover in the category color so every story still looks designed.
  */
-export function NewsCover({ item, sizes, priority = false, compact = false }: NewsCoverProps) {
+export function NewsCover({ item, sizes, priority = false }: NewsCoverProps) {
   if (item.image) {
     return (
       <Image
@@ -49,13 +47,7 @@ export function NewsCover({ item, sizes, priority = false, compact = false }: Ne
       </div>
 
       <span className={`absolute top-0 left-0 h-0.5 w-16 ${toneStyle.background}`} />
-      <span
-        className={`absolute bottom-0 left-0 font-extralight tracking-[-0.04em] text-white/25 ${
-          compact ? "p-2 text-[10px]" : "p-5 text-3xl sm:text-5xl"
-        }`}
-      >
-        {label}
-      </span>
+      <span className="absolute bottom-0 left-0 p-5 text-h1 font-light tracking-tight text-white/25">{label}</span>
     </div>
   );
 }
